@@ -1,4 +1,4 @@
-﻿namespace DemoApplication.Infrastructure
+﻿namespace DemoApplication.Services
 {
     public interface IGiftAidCalculatorFactory
     {
@@ -9,7 +9,8 @@
     {
         public IGiftAidCalculator Generate()
         {
-            return new GiftAidCalculator();
+            //Use IOC ?
+            return new GiftAidCalculator(new GiftAidRepository());
         }
     }
 }

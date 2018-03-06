@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DemoApplication.Infrastructure
+namespace DemoApplication.Services
 {
     public interface IGiftAidCalculator
     {

@@ -1,27 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using DemoApplication.Services;
 
 namespace DemoApplication.Controllers
 {
     [RoutePrefix("api")]
-    public class GiftAidController : ApiController
+    public class GiftAidController
     {
-        [HttpGet]
-        [Route("GiftAid/v1/get/{referenceId}")]
-        public string GetValue(Guid referenceId)
+        private readonly IGiftAidCalculationService _giftAidService;
+
+        public GiftAidController(IGiftAidCalculationService giftAidService)
         {
-            return "value";
+            _giftAidService = giftAidService;
         }
 
-        [HttpPost]
-        [Route("GiftAid/v1/Post")]
-        public void Post([FromBody]GiftAid giftAid)
+        public decimal GetGiftAid(decimal donationAmount, string country)
         {
-
+            return _giftAidService.CalculateGiftAid(donationAmount,country);
         }
     }
 

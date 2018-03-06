@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DemoApplication.Infrastructure
+namespace DemoApplication.Services
 {
     public class GiftAidService : IGiftAidService
     {

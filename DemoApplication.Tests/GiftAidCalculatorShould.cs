@@ -1,4 +1,4 @@
-using DemoApplication.Infrastructure;
+using DemoApplication.Services;
 using Moq;
 using NUnit.Framework;
 
@@ -8,11 +8,14 @@ namespace DemoApplication.Tests
     public class GiftAidCalculatorShould
     {
         private GiftAidCalculator _serviceUnderTest;
+        private Mock<IGiftAidRepository> mockGiftAidRepository; 
 
         [SetUp]
         public void SetUp()
-        { 
-            _serviceUnderTest = new GiftAidCalculator();
+        {
+            mockGiftAidRepository = new Mock<IGiftAidRepository>();
+
+            _serviceUnderTest = new GiftAidCalculator(mockGiftAidRepository.Object);
         }
 
         [Test]

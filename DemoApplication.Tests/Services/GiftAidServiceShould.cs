@@ -1,9 +1,6 @@
-﻿using System;
-using DemoApplication.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DemoApplication.Services;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace DemoApplication.Tests.Services
 {
