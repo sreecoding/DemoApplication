@@ -1,35 +1,26 @@
 ﻿using System;
+using System.Linq;
 
 namespace DemoApplication.Services
 {
     public class GiftAidCalculator : IGiftAidCalculator
     {
-        private IGiftAidRepository _giftAidRepository;
+        private readonly ITaxRepository _taxRepository;
 
-        public GiftAidCalculator(IGiftAidRepository giftAidRepository)
+        public GiftAidCalculator(ITaxRepository taxRepository)
         {
-            _giftAidRepository = giftAidRepository;
+            _taxRepository = taxRepository;
         }
 
-        public decimal Calculate(decimal donationAmount)
+        public decimal Calculate(decimal donationAmount,string country)
         {
-            var giftPercent = _giftAidRepository.GetGiftPercentage();
+            var giftPercent = _taxRepository.GetTaxRate(country).Single();
 
-            return (donationAmount * giftPercent)/100;
+            return (donationAmount * giftPercent.TaxRate)/(100 - giftPercent.TaxRate);
         }
     }
 
-    public interface IGiftAidRepository
-    {
-        int GetGiftPercentage();
+   
 
-    }
-
-    public class GiftAidRepository : IGiftAidRepository
-    {
-        public int GetGiftPercentage()
-        {
-            throw new NotImplementedException();
-        }
-    }
+   
 }

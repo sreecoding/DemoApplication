@@ -10,7 +10,7 @@
         public IGiftAidCalculator Generate()
         {
             //Use IOC ?
-            return new GiftAidCalculator(new GiftAidRepository());
+            return new GiftAidCalculator(new TaxRepository());
         }
     }
 }

@@ -1,31 +1,27 @@
-﻿using DemoApplication.Services;
+﻿using System.Collections.Generic;
+using DemoApplication.Services;
 using Moq;
 using NUnit.Framework;
+using Shouldly;
 
 namespace DemoApplication.Tests.Services
 {
     [TestFixture]
     public class GiftAidServiceShould
     {
-        private Mock<IGiftAidCalculatorFactory> mockGiftAidCalculatorFactory;
-        private Mock<IGiftAidCalculator> mockGiftAidCalculator;
-        private IGiftAidService serviceUnderTest;
+        private IGiftAidOrchestrationService _giftAidOrchestrationService;
+        private Mock<IGiftAidCalculator> _mockGiftAidCalculator;
 
         [Test]
-        public void GivenDonation_CalculatesGiftAid()
+        public void GivenDonationandCountry_ReturnsGiftAid()
         {
-            mockGiftAidCalculator = new Mock<IGiftAidCalculator>();
-            mockGiftAidCalculatorFactory = new Mock<IGiftAidCalculatorFactory>();
+            _mockGiftAidCalculator = new Mock<IGiftAidCalculator>();
+            _giftAidOrchestrationService = new GiftAidOrchestrationService(_mockGiftAidCalculator.Object);
+            _mockGiftAidCalculator.Setup(x => x.Calculate(100, "UK")).Returns(25);
 
-            mockGiftAidCalculatorFactory.Setup(x => x.Generate())
-                .Returns(mockGiftAidCalculator.Object);
+            var giftAid = _giftAidOrchestrationService.CalculateGiftAid(100, "UK");
 
-            serviceUnderTest = new GiftAidService(mockGiftAidCalculatorFactory.Object);
-
-            var giftAid = serviceUnderTest.CalculateGiftAid(100);
-
-            mockGiftAidCalculator.Verify(x=>x.Calculate(100),Times.Once);
-
+            giftAid.ShouldBe(25);
 
         }
     }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DemoApplication.Services;
 using Moq;
 using NUnit.Framework;
@@ -8,20 +9,24 @@ namespace DemoApplication.Tests
     public class GiftAidCalculatorShould
     {
         private GiftAidCalculator _serviceUnderTest;
-        private Mock<IGiftAidRepository> mockGiftAidRepository; 
+        private Mock<ITaxRepository> mockTaxRepository; 
 
         [SetUp]
         public void SetUp()
         {
-            mockGiftAidRepository = new Mock<IGiftAidRepository>();
+            mockTaxRepository = new Mock<ITaxRepository>();
 
-            _serviceUnderTest = new GiftAidCalculator(mockGiftAidRepository.Object);
+            mockTaxRepository.Setup(x => x.GetTaxRate("UK"))
+                .Returns(new List<TaxData>
+                    { new TaxData{TaxRate = 20}});
+
+            _serviceUnderTest = new GiftAidCalculator(mockTaxRepository.Object);
         }
 
         [Test]
         public void GivenDonation_ReturnsGiftAid()
         {
-            var giftAid = _serviceUnderTest.Calculate(100);
+            var giftAid = _serviceUnderTest.Calculate(100,"UK");
 
             Assert.IsNotNull(giftAid);
         }

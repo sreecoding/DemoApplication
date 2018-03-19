@@ -12,11 +12,10 @@ namespace DemoApplication.Tests
         [SetUp]
         public void Setup()
         {
-
             _serviceUnderTest = new GiftAidCalculatorFactory();
         }
 
-    [Test]
+        [Test]
         public void ReturnServiceOfTypeCalculator()
         {
             var calculator = _serviceUnderTest.Generate();

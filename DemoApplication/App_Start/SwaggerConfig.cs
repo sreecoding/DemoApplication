@@ -2,6 +2,7 @@ using System.Web.Http;
 using WebActivatorEx;
 using DemoApplication;
 using Swashbuckle.Application;
+using Swashbuckle.Examples;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -61,7 +62,7 @@ namespace DemoApplication
                         //c.BasicAuth("basic")
                         //    .Description("Basic HTTP Authentication");
                         //
-						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
+                        // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
                         //c.ApiKey("apiKey")
                         //    .Description("API Key Authentication")
                         //    .Name("apiKey")
@@ -120,6 +121,8 @@ namespace DemoApplication
                         // specific type, you can wire up one or more Schema filters.
                         //
                         //c.SchemaFilter<ApplySchemaVendorExtensions>();
+
+                        c.OperationFilter<ExamplesOperationFilter>();
 
                         // In a Swagger 2.0 document, complex types are typically declared globally and referenced by unique
                         // Schema Id. By default, Swashbuckle does NOT use the full type name in Schema Ids. In most cases, this

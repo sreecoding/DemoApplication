@@ -1,22 +1,41 @@
 ﻿using System;
+using System.Net;
 using System.Web.Http;
 using DemoApplication.Services;
+using Swashbuckle.Examples;
 
 namespace DemoApplication.Controllers
 {
-    [RoutePrefix("api")]
-    public class GiftAidController
+   [RoutePrefix("api")]
+    public class GiftAidController : ApiController
     {
-        private readonly IGiftAidCalculationService _giftAidService;
+        private readonly IGiftAidOrchestrationService _giftAidOrchestrationService;
 
-        public GiftAidController(IGiftAidCalculationService giftAidService)
+        public GiftAidController(IGiftAidOrchestrationService giftAidOrchestrationService)
         {
-            _giftAidService = giftAidService;
+            _giftAidOrchestrationService = giftAidOrchestrationService;
         }
 
-        public decimal GetGiftAid(decimal donationAmount, string country)
+        [HttpGet]
+        [Route("GiftAid/GetGiftAid")]
+        public IHttpActionResult GetGiftAid(decimal donationAmount, string country)
         {
-            return _giftAidService.CalculateGiftAid(donationAmount,country);
+            var giftAidAmount = _giftAidOrchestrationService.CalculateGiftAid(donationAmount, country);
+
+            return Ok(giftAidAmount);
+        }
+
+
+       // [SwaggerRequestExample(typeof(Donation), typeof(DonationModel))]
+        //if (!ModelState.IsValid)
+        //    return Content(HttpStatusCode.BadRequest, donation);
+    }
+
+    public class DonationModel : IExamplesProvider
+    {
+        public object GetExamples()
+        {
+            return new Donation(1000, "UK");
         }
     }
 

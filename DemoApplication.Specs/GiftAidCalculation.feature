@@ -14,3 +14,5 @@ Scenario: Calcualte Gift Aid
 	Given I have  No Gift Aid Excemption
 	When I make the Donation of 100 in UK
 	Then the Total Gift Amount Should be 25 pounds
+
+

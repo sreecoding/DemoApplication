@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using Dapper;
 
 namespace DemoApplication.Services
 {
@@ -10,10 +15,16 @@ namespace DemoApplication.Services
 
     public class TaxRepository : ITaxRepository
     {
+        public string ConnectionString = ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString;
+
+
         public IEnumerable<TaxData> GetTaxRate(string uk)
         {
-            return null;
-
+           using (IDbConnection db = new SqlConnection(ConnectionString))
+            {
+                string readSp = "GetAllTaxData";
+                return db.Query<TaxData>(readSp, commandType: CommandType.StoredProcedure).ToList();
+            }
         }
     }
 

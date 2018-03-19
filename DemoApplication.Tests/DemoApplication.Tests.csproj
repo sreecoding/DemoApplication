@@ -121,7 +121,6 @@
     <Compile Include="GiftAidCalculatorShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GiftAidServiceShould.cs" />
-    <Compile Include="Services\GiftAidCalculatonServiceShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

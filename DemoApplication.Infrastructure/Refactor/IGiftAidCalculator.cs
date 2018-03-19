@@ -4,6 +4,6 @@ namespace DemoApplication.Services
 {
     public interface IGiftAidCalculator
     {
-        Decimal Calculate(Decimal donationAmount);
+        Decimal Calculate(Decimal donationAmount, string country);
     }
 }

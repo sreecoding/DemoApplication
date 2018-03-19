@@ -6,6 +6,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using DemoApplication.Services;
 using DemoApplication.Controllers;
+using Swashbuckle.Application;
 
 namespace DemoApplication
 {
@@ -18,6 +19,14 @@ namespace DemoApplication
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "Swagger UI",
+                routeTemplate: "",
+                defaults: null,
+                constraints: null,
+                handler: new RedirectHandler(SwaggerDocsConfig.DefaultRootUrlResolver, "swagger/ui/index"));
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",
@@ -29,10 +38,10 @@ namespace DemoApplication
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<GiftAidCalculatorFactory>().As<IGiftAidCalculatorFactory>();
-            builder.RegisterType<GiftAidService>().As<IGiftAidService>();
+            builder.RegisterType<GiftAidOrchestrationService>().As<IGiftAidOrchestrationService>();
             builder.RegisterType<GiftAidCalculator>().As<IGiftAidCalculator>();
             builder.RegisterType<TaxRepository>().As<ITaxRepository>();
-            builder.RegisterType<GiftAidController>().UsingConstructor(typeof(IGiftAidService)).InstancePerRequest();
+            builder.RegisterType<GiftAidController>().UsingConstructor(typeof(IGiftAidOrchestrationService)).InstancePerRequest();
             var container = builder.Build();
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
