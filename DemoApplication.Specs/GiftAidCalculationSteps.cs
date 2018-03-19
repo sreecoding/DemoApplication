@@ -2,6 +2,7 @@
 using System.Net;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
+using DemoApplication.Repositories;
 using DemoApplication.Services;
 using Moq;
 using Shouldly;
@@ -14,9 +15,10 @@ namespace DemoApplication.Specs
     public class GiftAidCalculationSteps
     {
         private GiftAidController _giftAidController;
-        private NegotiatedContentResult<decimal> _result;
+        private OkNegotiatedContentResult<GiftAidResponse> _result;
         private Mock<ITaxRepository> _taxRepository;
         private IGiftAidOrchestrationService _giftAidOrchestrationService;
+
 
         [Given(@"I have paid (.*) pounds as Donation")]
         public void GivenIHavePaidPoundsAsDonation(int p0)
@@ -31,8 +33,7 @@ namespace DemoApplication.Specs
         [Then(@"the Total Gift Amount Should be (.*) pounds")]
         public void ThenTheGiftAidAmountShouldBePounds(Decimal p0)
         {
-            _result.StatusCode.ShouldBe(HttpStatusCode.OK);
-            _result.Content.ShouldBe(p0);
+            _result.Content.GiftAidAmount.ShouldBe(p0);
         }
 
         [Given(@"We have the Following Tax Data in the database")]
@@ -48,9 +49,9 @@ namespace DemoApplication.Specs
         {
             _giftAidOrchestrationService = new GiftAidOrchestrationService(new GiftAidCalculator(_taxRepository.Object));
 
-            _giftAidController = new GiftAidController(_giftAidOrchestrationService);
+            _giftAidController = new GiftAidController(_giftAidOrchestrationService,new RequestValidator());
 
-            _result = (NegotiatedContentResult<decimal>) _giftAidController.GetGiftAid(donationAmount, country);
+            _result = (OkNegotiatedContentResult<GiftAidResponse>) _giftAidController.GetGiftAid(donationAmount, country);
         }
 
     }

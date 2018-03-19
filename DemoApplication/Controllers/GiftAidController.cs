@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 using DemoApplication.Services;
@@ -10,37 +12,29 @@ namespace DemoApplication.Controllers
     public class GiftAidController : ApiController
     {
         private readonly IGiftAidOrchestrationService _giftAidOrchestrationService;
+        private readonly IRequestValidator _requestValidator;
 
-        public GiftAidController(IGiftAidOrchestrationService giftAidOrchestrationService)
+        public GiftAidController(IGiftAidOrchestrationService giftAidOrchestrationService, IRequestValidator requestValidator)
         {
             _giftAidOrchestrationService = giftAidOrchestrationService;
+            _requestValidator = requestValidator;
         }
 
         [HttpGet]
         [Route("GiftAid/GetGiftAid")]
         public IHttpActionResult GetGiftAid(decimal donationAmount, string country)
         {
+            var validationErrors = _requestValidator.Validate(donationAmount, country);
+
+            if (validationErrors.Any())
+                return Content(HttpStatusCode.BadRequest, validationErrors);
+
             var giftAidAmount = _giftAidOrchestrationService.CalculateGiftAid(donationAmount, country);
 
-            return Ok(giftAidAmount);
-        }
-
-
-       // [SwaggerRequestExample(typeof(Donation), typeof(DonationModel))]
-        //if (!ModelState.IsValid)
-        //    return Content(HttpStatusCode.BadRequest, donation);
-    }
-
-    public class DonationModel : IExamplesProvider
-    {
-        public object GetExamples()
-        {
-            return new Donation(1000, "UK");
+            return Ok(new GiftAidResponse {GiftAidAmount = giftAidAmount});
         }
     }
+  
 
-    public class GiftAid
-    {
-        public Decimal GiftAmount;
-    }
+  
 }

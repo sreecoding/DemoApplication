@@ -176,8 +176,13 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Donation.cs" />
+    <Compile Include="Controllers\DonationModel.cs" />
+    <Compile Include="Controllers\ErrorResponse.cs" />
     <Compile Include="Controllers\GiftAidController.cs" />
+    <Compile Include="Controllers\GiftAidResponse.cs" />
     <Compile Include="Controllers\HealthCheckController.cs" />
+    <Compile Include="Controllers\RequestValidator.cs" />
+    <Compile Include="Controllers\TaxRateController.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +218,10 @@
     <ProjectReference Include="..\DemoApplication.Infrastructure\DemoApplication.Services.csproj">
       <Project>{47A75F0C-51DC-4D89-982B-F547C694AA1E}</Project>
       <Name>DemoApplication.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DemoApplication.Repositories\DemoApplication.Repositories.csproj">
+      <Project>{C2ADB29D-C353-43A4-996D-A58BDA13654A}</Project>
+      <Name>DemoApplication.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

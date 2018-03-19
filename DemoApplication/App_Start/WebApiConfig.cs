@@ -6,6 +6,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using DemoApplication.Services;
 using DemoApplication.Controllers;
+using DemoApplication.Repositories;
 using Swashbuckle.Application;
 
 namespace DemoApplication
@@ -39,9 +40,10 @@ namespace DemoApplication
             var builder = new ContainerBuilder();
             builder.RegisterType<GiftAidCalculatorFactory>().As<IGiftAidCalculatorFactory>();
             builder.RegisterType<GiftAidOrchestrationService>().As<IGiftAidOrchestrationService>();
+            builder.RegisterType<RequestValidator>().As<IRequestValidator>();
             builder.RegisterType<GiftAidCalculator>().As<IGiftAidCalculator>();
             builder.RegisterType<TaxRepository>().As<ITaxRepository>();
-            builder.RegisterType<GiftAidController>().UsingConstructor(typeof(IGiftAidOrchestrationService)).InstancePerRequest();
+            builder.RegisterType<GiftAidController>().UsingConstructor(typeof(IGiftAidOrchestrationService),typeof(IRequestValidator)).InstancePerRequest();
             var container = builder.Build();
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);

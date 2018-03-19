@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DemoApplication.Repositories;
 using DemoApplication.Services;
 using Moq;
 using NUnit.Framework;

@@ -1,4 +1,6 @@
-﻿namespace DemoApplication.Services
+﻿using DemoApplication.Repositories;
+
+namespace DemoApplication.Services
 {
     public interface IGiftAidCalculatorFactory
     {

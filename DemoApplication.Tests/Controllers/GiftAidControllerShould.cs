@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
@@ -23,25 +24,32 @@ namespace DemoApplication.Tests.Controllers
             mockGiftAidService.Setup(x => x.CalculateGiftAid(100, "UK"))
                 .Returns(25);
 
-            giftAidController = new GiftAidController(mockGiftAidService.Object);
+            giftAidController = new GiftAidController(mockGiftAidService.Object, new RequestValidator());
         }
 
         [Test]
         public void GivenDonation_ThenCalculatesGiftAid()
         {
-            var giftAid = (OkNegotiatedContentResult<decimal>)giftAidController.GetGiftAid(100, "UK");
+            var giftAid = (OkNegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(100, "UK");
 
-            giftAid.Content.ShouldBe(25);
+            giftAid.Content.GiftAidAmount.ShouldBe(25);
         }
 
         [Test]
-        public void GivenInvalidModelState_ReturnsValidationError()
+        public void GivenInvalidCountry_ReturnsValidationError()
         {
-            giftAidController.ModelState.AddModelError("countryError","Country Code Not Valid");
-
-            var giftAid = (NegotiatedContentResult<Donation>)giftAidController.GetGiftAid(5, "");
+            var giftAid = (NegotiatedContentResult<List<ErrorResponse>>)giftAidController.GetGiftAid(1000, "");
             
             giftAid.StatusCode.ShouldBe(HttpStatusCode.BadRequest); 
+
+        }
+
+        [Test]
+        public void GivenInvalidAmount_ReturnsValidationError()
+        {
+            var giftAid = (NegotiatedContentResult<List<ErrorResponse>>)giftAidController.GetGiftAid(0, "UK");
+
+            giftAid.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 
         }
     }
