@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Web.Http;
 
-namespace DemoApplication.Controllers
+namespace DemoApplication.Controllers.TaxRate
 {
     [RoutePrefix("api")]
     public class TaxRateController : ApiController

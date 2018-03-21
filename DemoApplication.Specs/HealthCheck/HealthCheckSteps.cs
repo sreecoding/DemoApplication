@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.HealthCheck;
+using DemoApplication.Infrastructure.HealthCheck;
 using DemoApplication.Repositories;
 using Moq;
 using Shouldly;

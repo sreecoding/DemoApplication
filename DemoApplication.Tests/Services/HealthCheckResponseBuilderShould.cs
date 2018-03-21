@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.HealthCheck;
+using DemoApplication.Infrastructure.HealthCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using NUnit.Framework.Internal;

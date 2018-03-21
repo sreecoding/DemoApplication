@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
+using DemoApplication.Infrastructure.HealthCheck;
 
 namespace DemoApplication.Controllers.HealthCheck
 {
@@ -26,24 +27,5 @@ namespace DemoApplication.Controllers.HealthCheck
             return Content(HttpStatusCode.InternalServerError, healthCheckResponse);
         }
     }
-
-    public class HealthCheckResponse
-    {
-        public bool IsSystemHealthy { get; set; }
-
-        public IList<HealthCheckOutput> SubSystemHealthCheckOutputs { get; set; }
-         
-    }
-
-    
-    public class HealthCheckOutput
-    {
-        public bool IsHealthy { get; set; }
-
-        public string DependencyName { get; set; }
-    }
-
-   
-
  
 }

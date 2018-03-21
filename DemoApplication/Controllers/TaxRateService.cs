@@ -1,4 +1,6 @@
 ﻿using DemoApplication.Controllers;
+using DemoApplication.Controllers.TaxRate;
+
 
 namespace DemoApplication.Tests.Controllers
 {

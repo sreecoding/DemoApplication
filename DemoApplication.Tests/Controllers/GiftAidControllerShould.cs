@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
+using DemoApplication.Controllers.GiftAidController;
 using DemoApplication.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

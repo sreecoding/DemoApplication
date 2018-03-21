@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DemoApplication.Controllers
+namespace DemoApplication.Controllers.GiftAidController
 {
     public class GiftAidResponse
     {

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using DemoApplication.Controllers.HealthCheck;
 using DemoApplication.Repositories;
 
-namespace DemoApplication.Controllers
+namespace DemoApplication.Infrastructure.HealthCheck
 {
     public interface IHealthCheckFactory
     {

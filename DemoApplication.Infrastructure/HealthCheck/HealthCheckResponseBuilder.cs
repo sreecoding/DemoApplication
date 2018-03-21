@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DemoApplication.Controllers.HealthCheck;
+using DemoApplication.Infrastructure.HealthCheck;
 
 namespace DemoApplication.Controllers
 {

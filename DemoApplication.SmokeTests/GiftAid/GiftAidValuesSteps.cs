@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using DemoApplication.Controllers;
+using DemoApplication.Controllers.GiftAidController;
 using Newtonsoft.Json;
 using RestSharp;
 using Shouldly;
