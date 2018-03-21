@@ -1,24 +1,19 @@
 ﻿using System.Net;
-using System.Web.Http.Results;
 using DemoApplication.Controllers;
-using DemoApplication.Repositories;
-using DemoApplication.Services;
 using Newtonsoft.Json;
 using RestSharp;
 using Shouldly;
 using TechTalk.SpecFlow;
 
-namespace DemoApplication.SmokeTests
+namespace DemoApplication.SmokeTests.GiftAid
 {
     [Binding]
     public class GiftAidValuesSteps
     {
+        private const string GiftaidApiEndpoint = "/api/GiftAid/GetGiftAid";
+        private const string BaseUrl = "http://localhost:63094";
         private int _donationAmount;
         private string _country;
-
-        private GiftAidController _giftAidController;
-        private OkNegotiatedContentResult<GiftAidResponse> _result;
-        private IGiftAidOrchestrationService _giftAidOrchestrationService;
         private RestRequest _request;
         private IRestResponse _restResponse;
 
@@ -37,11 +32,11 @@ namespace DemoApplication.SmokeTests
         [When(@"a call is made to get Gift Aid")]
         public void WhenACallIsMadeToGetGiftAid()
         {
-            _request = new RestRequest("/api/GiftAid/GetGiftAid", Method.GET);
+            _request = new RestRequest(GiftaidApiEndpoint, Method.GET);
             _request.Parameters.Add(new Parameter() {Name = "country",Value = _country,Type = ParameterType.QueryString});
             _request.Parameters.Add(new Parameter() {Name = "donationAmount",Value = _donationAmount,Type = ParameterType.QueryString});
 
-            var client = new RestClient("http://localhost:63094");
+            var client = new RestClient(BaseUrl);
 
             _restResponse = client.Execute(_request);
         }

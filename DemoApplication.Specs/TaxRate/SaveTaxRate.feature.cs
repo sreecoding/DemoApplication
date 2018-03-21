@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace DemoApplication.Specs
+namespace DemoApplication.Specs.TaxRate
 {
     using TechTalk.SpecFlow;
     

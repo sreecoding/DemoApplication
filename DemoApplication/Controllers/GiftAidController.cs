@@ -24,6 +24,7 @@ namespace DemoApplication.Controllers
         [Route("GiftAid/GetGiftAid")]
         public IHttpActionResult GetGiftAid(decimal donationAmount, string country)
         {
+
             var validationErrors = _requestValidator.Validate(donationAmount, country);
 
             if (validationErrors.Any())

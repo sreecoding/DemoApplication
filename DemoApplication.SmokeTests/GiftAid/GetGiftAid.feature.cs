@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace DemoApplication.SmokeTests
+namespace DemoApplication.SmokeTests.GiftAid
 {
     using TechTalk.SpecFlow;
     

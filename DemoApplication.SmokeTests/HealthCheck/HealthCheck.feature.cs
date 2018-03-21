@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace DemoApplication.Specs
+namespace DemoApplication.SmokeTests.HealthCheck
 {
     using TechTalk.SpecFlow;
     
@@ -18,21 +18,22 @@ namespace DemoApplication.Specs
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("GiftAidCalculation")]
-    public partial class GiftAidCalculationFeature
+    [NUnit.Framework.DescriptionAttribute("HealthCheck")]
+    public partial class HealthCheckFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "GiftAidCalculation.feature"
+#line 1 "HealthCheck.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GiftAidCalculation", "\tIn order to give the maximum benefit to charities \r\n\tWhen a person makes a donat" +
-                    "ion\r\n\tI want to calculate the correct gift Aid for the donation. ", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "HealthCheck", "\tIn order to make sure that the service is up and running\r\n\tAs a developer\r\n\tI wa" +
+                    "nt to be able to call the HealthCheck End Point and verify that the service is u" +
+                    "p", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -64,38 +65,19 @@ namespace DemoApplication.Specs
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 6
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Country",
-                        "TaxRate"});
-            table1.AddRow(new string[] {
-                        "UK",
-                        "20"});
-#line 7
-testRunner.Given("We have the Following Tax Data in the database", ((string)(null)), table1, "Given ");
-#line hidden
-        }
-        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Calcualte Gift Aid")]
+        [NUnit.Framework.DescriptionAttribute("Health Check Call Happy Path")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void CalcualteGiftAid()
+        public virtual void HealthCheckCallHappyPath()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calcualte Gift Aid", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Health Check Call Happy Path", new string[] {
                         "mytag"});
-#line 13
+#line 7
 this.ScenarioSetup(scenarioInfo);
-#line 6
-this.FeatureBackground();
-#line 14
- testRunner.Given("I have  No Gift Aid Excemption", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 15
- testRunner.When("I make the Donation of 100 in UK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 16
- testRunner.Then("the Total Gift Amount Should be 25 pounds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 8
+ testRunner.When("I call the HealthCheck EndPoint", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 9
+ testRunner.Then("the result should be that the system is up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

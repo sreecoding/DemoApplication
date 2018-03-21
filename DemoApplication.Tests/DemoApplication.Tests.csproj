@@ -119,10 +119,14 @@
     <Compile Include="Controllers\GiftAidControllerShould.cs" />
     <Compile Include="Controllers\TaxRateControllerShould.cs" />
     <Compile Include="Controllers\TaxRateService.cs" />
+    <Compile Include="Controllers\HealthCheckControllerShould.cs" />
     <Compile Include="GiftAidCalculatorFactoryShould.cs" />
     <Compile Include="GiftAidCalculatorShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GiftAidServiceShould.cs" />
+    <Compile Include="Services\HealthCheckServiceShould.cs" />
+    <Compile Include="Services\HealthCheckFactoryShould.cs" />
+    <Compile Include="Services\HealthCheckResponseBuilderShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

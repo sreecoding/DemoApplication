@@ -85,19 +85,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetGiftAid.feature.cs">
+    <Compile Include="GiftAid\GetGiftAid.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GetGiftAid.feature</DependentUpon>
     </Compile>
-    <Compile Include="GiftAidValuesSteps.cs" />
+    <Compile Include="GiftAid\GiftAidValuesSteps.cs" />
+    <Compile Include="HealthCheck\HealthCheckSteps.cs" />
+    <Compile Include="HealthCheck\HealthCheck.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HealthCheck.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="GetGiftAid.feature">
+    <None Include="GiftAid\GetGiftAid.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetGiftAid.feature.cs</LastGenOutput>
+    </None>
+    <None Include="HealthCheck\HealthCheck.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>HealthCheck.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
