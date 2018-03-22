@@ -28,26 +28,16 @@ namespace DemoApplication.Tests.Controllers
         }
 
         [Test]
-        public void GivenHealthySystem_ReturnStatusOK()
+        [TestCase(true,ExpectedResult = HttpStatusCode.OK)]
+        [TestCase(false,ExpectedResult = HttpStatusCode.InternalServerError)]
+        public HttpStatusCode GivenHealthySystem_ReturnStatusOK(bool isSystemHealthy)
         {
             _mockHealthCheckService.Setup(x => x.CheckSystemHealth())
-                .Returns(new HealthCheckResponse(){IsSystemHealthy = true});
+                .Returns(new HealthCheckResponse(){IsSystemHealthy = isSystemHealthy});
 
             _result = (NegotiatedContentResult<HealthCheckResponse>)_healthCheckController.Get();
 
-            _result.StatusCode.ShouldBe(HttpStatusCode.OK);
+           return  _result.StatusCode;
         }
-
-        [Test]
-        public void GivenUnHealthySystem_ReturnStatusError()
-        {
-            _mockHealthCheckService.Setup(x => x.CheckSystemHealth())
-                .Returns(new HealthCheckResponse() { IsSystemHealthy = false });
-
-            _result = (NegotiatedContentResult<HealthCheckResponse>)_healthCheckController.Get();
-
-            _result.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
-        }
-
     }
 }

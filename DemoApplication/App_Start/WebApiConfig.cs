@@ -29,7 +29,6 @@ namespace DemoApplication
             config.Services.Replace(typeof(IExceptionLogger), new GlobalExceptionLogger());
             config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
 
-
             BuildDependencyResolver();
 
             config.MapHttpAttributeRoutes();
@@ -40,12 +39,6 @@ namespace DemoApplication
                 defaults: null,
                 constraints: null,
                 handler: new RedirectHandler(SwaggerDocsConfig.DefaultRootUrlResolver, "swagger/ui/index"));
-
-            //config.Routes.MapHttpRoute(
-            //    name: "DefaultApi",
-            //    routeTemplate: "api/{controller}/{action}/{id}",
-            //    defaults: new { id = RouteParameter.Optional }
-           // );
         }
 
         private static void BuildDependencyResolver()

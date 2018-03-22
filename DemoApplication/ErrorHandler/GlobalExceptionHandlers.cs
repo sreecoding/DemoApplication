@@ -9,10 +9,10 @@ namespace DemoApplication.ErrorHandler
     {
         public override void Handle(ExceptionHandlerContext context)
         {
-            // Get the ID
-            var errorData = "Log Error Here";
+            var errorData = context.Exception.InnerException;
 
             var response = context.Request.CreateResponse(HttpStatusCode.InternalServerError, errorData);
+
             context.Result = new ResponseMessageResult(response);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAidController;
@@ -16,7 +17,7 @@ namespace DemoApplication.Specs.GiftAid
     public class GiftAidCalculationSteps
     {
         private GiftAidController _giftAidController;
-        private OkNegotiatedContentResult<GiftAidResponse> _result;
+        private NegotiatedContentResult<GiftAidResponse> _result;
         private Mock<ITaxRepository> _taxRepository;
         private IGiftAidOrchestrationService _giftAidOrchestrationService;
         private decimal _donation;
@@ -58,7 +59,7 @@ namespace DemoApplication.Specs.GiftAid
 
             _giftAidController = new GiftAidController(_giftAidOrchestrationService, new RequestValidator());
 
-            _result = (OkNegotiatedContentResult<GiftAidResponse>)_giftAidController.GetGiftAid(_donation, _country, _event);
+            _result = (NegotiatedContentResult<GiftAidResponse>)_giftAidController.GetGiftAid(_donation, _country, _event);
         }
 
         [Then(@"the Total Gift Aid Amount Should be (.*) pounds")]
@@ -66,5 +67,18 @@ namespace DemoApplication.Specs.GiftAid
         {
             _result.Content.GiftAidAmount.ShouldBe(giftAidAmount);
         }
+
+        [Then(@"the Status Code should be Ok")]
+        public void ThenTheStatusCodeShouldBeOk()
+        {
+            _result.StatusCode.ShouldBe(HttpStatusCode.OK);
+        }
+
+        [Then(@"we get a BadRequest Response")]
+        public void ThenWeGetABadRequestResponse()
+        {
+            _result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        }
+
     }
 }

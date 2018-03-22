@@ -2,7 +2,14 @@
 {
     public class ErrorResponse
     {
-        public string ErrorMessage { get; set; }
-        public string ParameterName { get; set; }
+        public ErrorResponse(string errorMessage, string parameterName)
+        {
+            ErrorMessage = errorMessage;
+            ParameterName = parameterName;
+        }
+
+        public string ErrorMessage { get; }
+
+        public string ParameterName { get; }
     }
 }

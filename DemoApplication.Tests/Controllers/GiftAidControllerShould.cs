@@ -22,49 +22,32 @@ namespace DemoApplication.Tests.Controllers
         public void Setup()
         {
             mockGiftAidService = new Mock<IGiftAidOrchestrationService>();
-            mockGiftAidService.Setup(x => x.CalculateGiftAid(100, "UK","General"))
-                .Returns(25);
-
             giftAidController = new GiftAidController(mockGiftAidService.Object, new RequestValidator());
         }
 
         [Test]
-        [TestCase("General")]
-        public void GivenDonation_ThenCalculatesGiftAid(string eventType)
+        [TestCase("General",25)]
+        [TestCase("Swimming",30)]
+        public void GivenDonation_ThenCalculatesGiftAid(string eventType, int giftAidValue)
         {
-            var giftAid = (OkNegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(100, "UK",eventType);
+            mockGiftAidService.Setup(x => x.CalculateGiftAid(100, "UK", eventType))
+                .Returns(giftAidValue);
 
-            giftAid.Content.GiftAidAmount.ShouldBe(25);
+            var giftAid = (NegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(100, "UK",eventType);
+
+            giftAid.Content.GiftAidAmount.ShouldBe(giftAidValue);
         }
 
         [Test]
-        public void GivenDonationForSwimming_ThenCalculatesGiftAid()
+        [TestCase(1000,"","General")]
+        [TestCase(0,"UK","General")]
+        [TestCase(1000,"UK","Invalid")]
+        public void GivenInvalidInputs_ReturnsValidationError(int donationAmount, string country, string eventType)
         {
-            mockGiftAidService.Setup(x => x.CalculateGiftAid(100, "UK", "Swimming"))
-                .Returns(30);
+            var giftAidResponse = (NegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(donationAmount, country, eventType);
 
-            var giftAid = (OkNegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(100, "UK", "Swimming");
-
-          
-
-            giftAid.Content.GiftAidAmount.ShouldBe(30);
-        }
-
-        [Test]
-        public void GivenInvalidCountry_ReturnsValidationError()
-        {
-            var giftAid = (NegotiatedContentResult<List<ErrorResponse>>)giftAidController.GetGiftAid(1000, "", "General");
-            
-            giftAid.StatusCode.ShouldBe(HttpStatusCode.BadRequest); 
-
-        }
-
-        [Test]
-        public void GivenInvalidAmount_ReturnsValidationError()
-        {
-            var giftAid = (NegotiatedContentResult<List<ErrorResponse>>)giftAidController.GetGiftAid(0, "UK", "General");
-
-            giftAid.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            giftAidResponse.StatusCode.ShouldBe(HttpStatusCode.BadRequest); 
+            giftAidResponse.Content.ValidationErrors.Count.ShouldBe(1);
 
         }
     }

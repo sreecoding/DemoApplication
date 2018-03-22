@@ -196,8 +196,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Donation.cs" />
-    <Compile Include="Controllers\DonationModel.cs" />
     <Compile Include="Controllers\ErrorResponse.cs" />
     <Compile Include="Controllers\GiftAidController\GiftAidController.cs" />
     <Compile Include="Controllers\GiftAidController\GiftAidResponse.cs" />

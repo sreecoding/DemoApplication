@@ -22,6 +22,15 @@ Scenario: Calcualte Gift Aid for Swimming
 	And the Donation Amount is 100 pounds
 	And the Donation Country is UK
 	When I make the Donation 
+	Then the Status Code should be Ok
 	Then the Total Gift Aid Amount Should be 30 pounds
+
+
+Scenario: Invalid input returns a BadRequest
+	Given The Event is XYZ
+	And the Donation Amount is 100 pounds
+	And the Donation Country is UK
+	When I make the Donation 
+	Then we get a BadRequest Response
 
 

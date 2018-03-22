@@ -34,14 +34,14 @@ namespace DemoApplication.Controllers.GiftAidController
         [ResponseType(typeof(GiftAidResponse))]
         public IHttpActionResult GetGiftAid(decimal donationAmount, string country, string eventType)
         {
-            var validationErrors = _requestValidator.Validate(donationAmount, country);
+            var validationErrors = _requestValidator.Validate(donationAmount, country,eventType);
 
             if (validationErrors.Any())
-                return Content(HttpStatusCode.BadRequest, validationErrors);
+                return Content(HttpStatusCode.BadRequest, new GiftAidResponse(0, validationErrors));
 
             var giftAidAmount = _giftAidOrchestrationService.CalculateGiftAid(donationAmount, country, eventType);
 
-            return Ok(new GiftAidResponse {GiftAidAmount = giftAidAmount});
+            return Content(HttpStatusCode.OK,new GiftAidResponse(giftAidAmount,validationErrors));
         }
     }
   

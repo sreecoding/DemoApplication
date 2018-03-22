@@ -1,13 +1,20 @@
 ﻿using System.Web.Http.ExceptionHandling;
+using Microsoft.ApplicationInsights;
 
 namespace DemoApplication.ErrorHandler
 {
     public class GlobalExceptionLogger : ExceptionLogger
     {
+        private readonly TelemetryClient _telemetryClient;
+
+        public GlobalExceptionLogger()
+        {
+            _telemetryClient = new TelemetryClient();
+        }
+
         public override void Log(ExceptionLoggerContext context)
         {
-            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient();
-            telemetry.TrackTrace("Error Occured");
+            _telemetryClient.TrackTrace(context.Exception.StackTrace);
         }
     }
 }
