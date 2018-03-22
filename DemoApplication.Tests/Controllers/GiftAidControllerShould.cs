@@ -22,24 +22,38 @@ namespace DemoApplication.Tests.Controllers
         public void Setup()
         {
             mockGiftAidService = new Mock<IGiftAidOrchestrationService>();
-            mockGiftAidService.Setup(x => x.CalculateGiftAid(100, "UK"))
+            mockGiftAidService.Setup(x => x.CalculateGiftAid(100, "UK","General"))
                 .Returns(25);
 
             giftAidController = new GiftAidController(mockGiftAidService.Object, new RequestValidator());
         }
 
         [Test]
-        public void GivenDonation_ThenCalculatesGiftAid()
+        [TestCase("General")]
+        public void GivenDonation_ThenCalculatesGiftAid(string eventType)
         {
-            var giftAid = (OkNegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(100, "UK");
+            var giftAid = (OkNegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(100, "UK",eventType);
 
             giftAid.Content.GiftAidAmount.ShouldBe(25);
         }
 
         [Test]
+        public void GivenDonationForSwimming_ThenCalculatesGiftAid()
+        {
+            mockGiftAidService.Setup(x => x.CalculateGiftAid(100, "UK", "Swimming"))
+                .Returns(30);
+
+            var giftAid = (OkNegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(100, "UK", "Swimming");
+
+          
+
+            giftAid.Content.GiftAidAmount.ShouldBe(30);
+        }
+
+        [Test]
         public void GivenInvalidCountry_ReturnsValidationError()
         {
-            var giftAid = (NegotiatedContentResult<List<ErrorResponse>>)giftAidController.GetGiftAid(1000, "");
+            var giftAid = (NegotiatedContentResult<List<ErrorResponse>>)giftAidController.GetGiftAid(1000, "", "General");
             
             giftAid.StatusCode.ShouldBe(HttpStatusCode.BadRequest); 
 
@@ -48,7 +62,7 @@ namespace DemoApplication.Tests.Controllers
         [Test]
         public void GivenInvalidAmount_ReturnsValidationError()
         {
-            var giftAid = (NegotiatedContentResult<List<ErrorResponse>>)giftAidController.GetGiftAid(0, "UK");
+            var giftAid = (NegotiatedContentResult<List<ErrorResponse>>)giftAidController.GetGiftAid(0, "UK", "General");
 
             giftAid.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using DemoApplication.Controllers;
-using DemoApplication.Controllers.HealthCheck;
+﻿using System.Collections.Generic;
 using DemoApplication.Infrastructure.HealthCheck;
 using DemoApplication.Repositories;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;

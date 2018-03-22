@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Web.Http;
+﻿using System.Net;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.HealthCheck;
@@ -10,7 +8,7 @@ using Moq;
 using Shouldly;
 using TechTalk.SpecFlow;
 
-namespace DemoApplication.Specs
+namespace DemoApplication.Specs.HealthCheck
 {
     [Binding]
     public class HealthCheckSteps

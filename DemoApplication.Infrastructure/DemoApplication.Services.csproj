@@ -60,16 +60,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GiftAidCalculatorFinder.cs" />
+    <Compile Include="GiftAid\SwimmingGiftAidCalculator.cs" />
     <Compile Include="HealthCheck\HealthCheckFactory.cs" />
     <Compile Include="HealthCheck\HealthCheckOutput.cs" />
     <Compile Include="HealthCheck\HealthCheckResponse.cs" />
     <Compile Include="HealthCheck\HealthCheckResponseBuilder.cs" />
     <Compile Include="HealthCheck\HealthCheckService.cs" />
-    <Compile Include="Refactor\GiftAidCalculator.cs" />
+    <Compile Include="GiftAid\GeneralGiftAidCalculator.cs" />
     <Compile Include="GiftAidOrchestrationService.cs" />
-    <Compile Include="Refactor\GiftAidCalculatorFactory.cs" />
-    <Compile Include="Refactor\GiftAidServiceX.cs" />
-    <Compile Include="Refactor\IGiftAidCalculator.cs" />
+    <Compile Include="GiftAid\IGiftAidCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

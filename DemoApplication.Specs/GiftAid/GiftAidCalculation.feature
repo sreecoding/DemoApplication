@@ -8,11 +8,20 @@ Given We have the Following Tax Data in the database
 | Country | TaxRate |
 | UK      | 20      |
 
-
 @mytag
 Scenario: Calcualte Gift Aid
-	Given I have  No Gift Aid Excemption
-	When I make the Donation of 100 in UK
-	Then the Total Gift Amount Should be 25 pounds
+	Given The Event is General
+	And the Donation Amount is 100 pounds
+	And the Donation Country is UK
+	When I make the Donation 
+	Then the Total Gift Aid Amount Should be 25 pounds
+
+
+Scenario: Calcualte Gift Aid for Swimming
+	Given The Event is Swimming
+	And the Donation Amount is 100 pounds
+	And the Donation Country is UK
+	When I make the Donation 
+	Then the Total Gift Aid Amount Should be 30 pounds
 
 

@@ -17,6 +17,7 @@ namespace DemoApplication.SmokeTests.GiftAid
         private string _country;
         private RestRequest _request;
         private IRestResponse _restResponse;
+        private string _eventType;
 
         [Given(@"I have a Donation Amount of 1000")]
         public void GivenIHaveADonationAmountOf()
@@ -29,13 +30,21 @@ namespace DemoApplication.SmokeTests.GiftAid
         {
             _country = "UK";
         }
-        
+
+        [Given(@"the event type is General")]
+        public void GivenTheEventTypeIsGeneral()
+        {
+            _eventType = "General";
+        }
+
+
         [When(@"a call is made to get Gift Aid")]
         public void WhenACallIsMadeToGetGiftAid()
         {
             _request = new RestRequest(GiftaidApiEndpoint, Method.GET);
             _request.Parameters.Add(new Parameter() {Name = "country",Value = _country,Type = ParameterType.QueryString});
             _request.Parameters.Add(new Parameter() {Name = "donationAmount",Value = _donationAmount,Type = ParameterType.QueryString});
+            _request.Parameters.Add(new Parameter() {Name = "eventtype",Value = _eventType, Type = ParameterType.QueryString});
 
             var client = new RestClient(BaseUrl);
 

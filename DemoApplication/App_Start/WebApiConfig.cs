@@ -11,6 +11,7 @@ using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAidController;
 using DemoApplication.Controllers.HealthCheck;
 using DemoApplication.ErrorHandler;
+using DemoApplication.Infrastructure;
 using DemoApplication.Infrastructure.HealthCheck;
 using DemoApplication.Repositories;
 using Swashbuckle.Application;
@@ -50,10 +51,9 @@ namespace DemoApplication
         private static void BuildDependencyResolver()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<GiftAidCalculatorFactory>().As<IGiftAidCalculatorFactory>();
+            builder.RegisterType<GiftAidCalculatorFinder>().As<IGiftAidCalculatorFinder>();
             builder.RegisterType<GiftAidOrchestrationService>().As<IGiftAidOrchestrationService>();
             builder.RegisterType<RequestValidator>().As<IRequestValidator>();
-            builder.RegisterType<GiftAidCalculator>().As<IGiftAidCalculator>();
             builder.RegisterType<HealthCheckService>().As<IHealthCheckService>();
             builder.RegisterType<HealthCheckFactory>().As<IHealthCheckFactory>();
             builder.RegisterType<HealthCheckResponseBuilder>().As<IHealthCheckResponseBuilder>();
