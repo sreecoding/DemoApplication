@@ -9,5 +9,7 @@ namespace DemoApplication.Services
 
 
         bool MatchEvent(string eventType);
+
+        string GetGiftAidType();
     }
 }

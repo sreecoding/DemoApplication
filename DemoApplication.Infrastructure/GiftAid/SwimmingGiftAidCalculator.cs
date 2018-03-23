@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DemoApplication.Domain;
 using DemoApplication.Repositories;
 using DemoApplication.Services;
 
@@ -19,7 +15,12 @@ namespace DemoApplication.Infrastructure.GiftAid
 
         public bool MatchEvent(string eventType)
         {
-            return eventType == "Swimming";
+            return eventType == GetGiftAidType();
+        }
+
+        public string GetGiftAidType()
+        {
+            return GiftAidConstants.EventTypes.Swimming;
         }
     }
 }

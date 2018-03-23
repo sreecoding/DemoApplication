@@ -11,7 +11,7 @@ namespace DemoApplication.Infrastructure.GiftAid
 
     public class GiftAidCalculatorFinder : IGiftAidCalculatorFinder
     {
-        private List<IGiftAidCalculator> _giftAidCalculators;
+        private readonly List<IGiftAidCalculator> _giftAidCalculators;
 
         public GiftAidCalculatorFinder(IEnumerable<IGiftAidCalculator> giftAidCalculators)
         {

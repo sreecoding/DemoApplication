@@ -1,3 +1,4 @@
+using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Repositories;
 using DemoApplication.Services;
 using NUnit.Framework;

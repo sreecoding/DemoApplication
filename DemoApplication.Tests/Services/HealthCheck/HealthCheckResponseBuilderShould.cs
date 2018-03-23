@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DemoApplication.Controllers;
-using DemoApplication.Controllers.HealthCheck;
+using DemoApplication.Domain;
 using DemoApplication.Infrastructure.HealthCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using Shouldly;
 
-namespace DemoApplication.Tests.Services
+namespace DemoApplication.Tests.Services.HealthCheck
 {
     [TestFixture]
     public class HealthCheckResponseBuilderShould
@@ -29,7 +26,7 @@ namespace DemoApplication.Tests.Services
         {
             var healthCheckOutputs = new List<HealthCheckOutput>()
             {
-                new HealthCheckOutput() {DependencyName = "SQL Database", IsHealthy = isHealthy}
+                new HealthCheckOutput() {DependencyName = HealthCheckConstants.SubSystem.SqlDatabase, IsHealthy = isHealthy}
             };
 
             _healthCheckResponse = healthCheckResponseBuilder.GenerateHealthCheckResponse(healthCheckOutputs);

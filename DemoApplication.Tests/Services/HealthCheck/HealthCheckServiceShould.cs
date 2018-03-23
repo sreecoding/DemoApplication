@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DemoApplication.Controllers;
-using DemoApplication.Controllers.HealthCheck;
+using DemoApplication.Domain;
 using DemoApplication.Infrastructure.HealthCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DemoApplication.Tests.Services
+namespace DemoApplication.Tests.Services.HealthCheck
 {
     [TestFixture]
     public class HealthCheckServiceShould
@@ -29,7 +27,7 @@ namespace DemoApplication.Tests.Services
             _healthCheckService = new HealthCheckService(_mockHealthCheckfactory.Object,
                                                     _mockHealthCheckResponseBuilder.Object);
             _subSystemHealthCheckOutputs = new List<HealthCheckOutput>
-                { new HealthCheckOutput { DependencyName = "SQL Server", IsHealthy = true } };
+                { new HealthCheckOutput { DependencyName = HealthCheckConstants.SubSystem.SqlDatabase, IsHealthy = true } };
         }
 
         [Test]
@@ -59,7 +57,7 @@ namespace DemoApplication.Tests.Services
 
             var subSystemOutput = response.SubSystemHealthCheckOutputs.Single();
 
-            subSystemOutput.DependencyName.ShouldBe("SQL Server");
+            subSystemOutput.DependencyName.ShouldBe(HealthCheckConstants.SubSystem.SqlDatabase);
             subSystemOutput.IsHealthy.ShouldBe(true);
         }
 
@@ -79,7 +77,7 @@ namespace DemoApplication.Tests.Services
         {
             var healthCheckOutputs = new List<HealthCheckOutput>()
             {
-                new HealthCheckOutput() {DependencyName = "SQL Database", IsHealthy = isSystemHealthy}
+                new HealthCheckOutput() {DependencyName =  HealthCheckConstants.SubSystem.SqlDatabase, IsHealthy = isSystemHealthy}
             };
 
             _mockHealthCheckfactory.Setup(x => x.GenerateHealthCheckOutputs())

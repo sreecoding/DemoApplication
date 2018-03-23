@@ -3,10 +3,9 @@ using DemoApplication.Infrastructure.HealthCheck;
 using DemoApplication.Repositories;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using Shouldly;
 
-namespace DemoApplication.Tests.Services
+namespace DemoApplication.Tests.Services.HealthCheck
 {
     [TestFixture]
     public class HealthCheckFactoryShould

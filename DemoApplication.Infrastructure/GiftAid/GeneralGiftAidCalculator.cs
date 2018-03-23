@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using DemoApplication.Domain;
 using DemoApplication.Repositories;
+using DemoApplication.Services;
 
-namespace DemoApplication.Services
+namespace DemoApplication.Infrastructure.GiftAid
 {
     public class GeneralGiftAidCalculator : IGiftAidCalculator
     {
@@ -14,7 +14,12 @@ namespace DemoApplication.Services
 
         public bool MatchEvent(string eventType)
         {
-            return eventType == "General";
+            return eventType == GetGiftAidType();
+        }
+
+        public string GetGiftAidType()
+        {
+            return GiftAidConstants.EventTypes.General;
         }
     }
 }

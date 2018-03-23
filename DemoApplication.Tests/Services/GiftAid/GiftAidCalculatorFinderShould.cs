@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DemoApplication.Domain;
 using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Services;
 using NUnit.Framework;
@@ -11,9 +12,9 @@ namespace DemoApplication.Tests.Services.GiftAid
         private IGiftAidCalculatorFinder _giftAidCalculatorFinder;
 
         [Test]
-        [TestCase("Swimming", ExpectedResult = typeof(SwimmingGiftAidCalculator))]
-        [TestCase("General", ExpectedResult = typeof(GeneralGiftAidCalculator))]
-        public object ReturntheCalculatorMatchingEventtype(string eventType)
+        [TestCase(GiftAidConstants.EventTypes.Swimming, ExpectedResult = typeof(SwimmingGiftAidCalculator))]
+        [TestCase(GiftAidConstants.EventTypes.General, ExpectedResult = typeof(GeneralGiftAidCalculator))]
+        public object ReturntheCalculatorMatchingEventType(string eventType)
         {
             _giftAidCalculatorFinder = new GiftAidCalculatorFinder(new List<IGiftAidCalculator>()
                 { new GeneralGiftAidCalculator(), new SwimmingGiftAidCalculator()});

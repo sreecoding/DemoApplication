@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DemoApplication.Domain;
 using DemoApplication.Repositories;
 
 namespace DemoApplication.Infrastructure.HealthCheck
@@ -21,7 +22,7 @@ namespace DemoApplication.Infrastructure.HealthCheck
         {
             var healthCheckOutputs = new List<HealthCheckOutput>
             {
-                new HealthCheckOutput() {DependencyName = "SQL Database", IsHealthy = _databaseConnection.CheckConnection()}
+                new HealthCheckOutput() {DependencyName = HealthCheckConstants.SubSystem.SqlDatabase, IsHealthy = _databaseConnection.CheckConnection()}
             };
 
             return healthCheckOutputs;

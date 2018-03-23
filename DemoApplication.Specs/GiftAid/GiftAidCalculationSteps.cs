@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAidController;
-using DemoApplication.Infrastructure;
 using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Repositories;
 using DemoApplication.Services;
@@ -27,7 +25,8 @@ namespace DemoApplication.Specs.GiftAid
         private decimal _donation;
         private string _country;
         private string _event;
-        
+        private List<IGiftAidCalculator> _giftAidCalculators;
+
 
         [Given(@"We have the Following Tax Data in the database")]
         public void GivenWeHaveTheFollowingTaxDataInTheDatabase(Table table)
@@ -58,11 +57,11 @@ namespace DemoApplication.Specs.GiftAid
         [When(@"I make the Donation")]
         public async void WhenIMakeTheDonation()
         {
-            _giftAidOrchestrationService =
-                new GiftAidOrchestrationService(_taxRepository.Object, new GiftAidCalculatorFinder(
-                    new List<IGiftAidCalculator>(){ new GeneralGiftAidCalculator(), new SwimmingGiftAidCalculator()}));
+            _giftAidCalculators = new List<IGiftAidCalculator>(){ new GeneralGiftAidCalculator(), new SwimmingGiftAidCalculator()};
 
-            _giftAidController = new GiftAidController(_giftAidOrchestrationService, new RequestValidator());
+            _giftAidOrchestrationService =new GiftAidOrchestrationService(_taxRepository.Object, new GiftAidCalculatorFinder(_giftAidCalculators));
+
+            _giftAidController = new GiftAidController(_giftAidOrchestrationService, new RequestValidator(_giftAidCalculators));
 
             _result = (NegotiatedContentResult<GiftAidResponse>)await _giftAidController.GetGiftAid(_donation, _country, _event);
         }

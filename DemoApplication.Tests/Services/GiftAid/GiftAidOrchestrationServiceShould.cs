@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DemoApplication.Domain;
 using DemoApplication.Infrastructure;
 using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Repositories;
@@ -36,8 +37,8 @@ namespace DemoApplication.Tests.Services.GiftAid
         }
 
         [Test]
-        [TestCase("General","UK",25)]
-        [TestCase("Swimming", "UK", 30)]
+        [TestCase(GiftAidConstants.EventTypes.General, "UK",25)]
+        [TestCase(GiftAidConstants.EventTypes.Swimming, "UK", 30)]
         public async Task GivenGeneralDonationandCountry_ReturnsGiftAid(string eventType, string country, int giftAidValue)
         {
             _giftAidCalculatorFinder.Setup(x => x.Find(eventType)).Returns(_mockGiftAidCalculator.Object);
@@ -50,8 +51,8 @@ namespace DemoApplication.Tests.Services.GiftAid
         }
 
         [Test]
-        [TestCase("General")]
-        [TestCase("Swimming")]
+        [TestCase(GiftAidConstants.EventTypes.General)]
+        [TestCase(GiftAidConstants.EventTypes.Swimming)]
         public async Task GivenNoTaxRateForCountry_ReturnsGiftAidAsZero(string eventType)
         {
             _taxRepository.Setup(x => x.GetTaxRate("US"))
