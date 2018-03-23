@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -58,7 +59,8 @@ namespace DemoApplication.Specs.GiftAid
         public async void WhenIMakeTheDonation()
         {
             _giftAidOrchestrationService =
-                new GiftAidOrchestrationService(_taxRepository.Object, new GiftAidCalculatorFinder());
+                new GiftAidOrchestrationService(_taxRepository.Object, new GiftAidCalculatorFinder(
+                    new List<IGiftAidCalculator>(){ new GeneralGiftAidCalculator(), new SwimmingGiftAidCalculator()}));
 
             _giftAidController = new GiftAidController(_giftAidOrchestrationService, new RequestValidator());
 

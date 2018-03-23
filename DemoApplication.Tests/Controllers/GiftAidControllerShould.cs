@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
@@ -39,6 +40,7 @@ namespace DemoApplication.Tests.Controllers
             var giftAid = (NegotiatedContentResult<GiftAidResponse>)await giftAidController.GetGiftAid(100, "UK",eventType);
 
             giftAid.Content.GiftAidAmount.ShouldBe(giftAidValue);
+            giftAid.Content.ValidationErrors.Count.ShouldBe(0);
         }
 
         [Test]
@@ -49,8 +51,12 @@ namespace DemoApplication.Tests.Controllers
         {
             var giftAidResponse = (NegotiatedContentResult<GiftAidResponse>) await giftAidController.GetGiftAid(donationAmount, country, eventType);
 
-            giftAidResponse.StatusCode.ShouldBe(HttpStatusCode.BadRequest); 
-            giftAidResponse.Content.ValidationErrors.Count.ShouldBe(1);
+            giftAidResponse.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+
+            var error = giftAidResponse.Content.ValidationErrors.Single();
+
+            error.ErrorMessage.ShouldNotBeNullOrEmpty();
+            error.ParameterName.ShouldNotBeNullOrEmpty();
 
         }
     }

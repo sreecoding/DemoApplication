@@ -13,10 +13,13 @@ namespace DemoApplication.Infrastructure.GiftAid
     {
         private List<IGiftAidCalculator> _giftAidCalculators;
 
+        public GiftAidCalculatorFinder(IEnumerable<IGiftAidCalculator> giftAidCalculators)
+        {
+            _giftAidCalculators = new List<IGiftAidCalculator>(giftAidCalculators);
+        }
+
         public IGiftAidCalculator Find(string eventType)
         {
-            _giftAidCalculators = new List<IGiftAidCalculator>() {new GeneralGiftAidCalculator(), new SwimmingGiftAidCalculator()};
-
             var giftAidCalculator = _giftAidCalculators.First(c => c.MatchEvent(eventType));
 
             return giftAidCalculator;

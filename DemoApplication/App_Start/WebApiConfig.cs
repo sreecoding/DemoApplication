@@ -9,6 +9,7 @@ using DemoApplication.ErrorHandler;
 using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Infrastructure.HealthCheck;
 using DemoApplication.Repositories;
+using DemoApplication.Services;
 using Swashbuckle.Application;
 //using Asos.Identity.Core.Api.Authentication.Configuration;
 
@@ -49,6 +50,9 @@ namespace DemoApplication
             builder.RegisterType<HealthCheckResponseBuilder>().As<IHealthCheckResponseBuilder>();
             builder.RegisterType<DatabaseCheck>().As<IDatabaseCheck>();
             builder.RegisterType<TaxRepository>().As<ITaxRepository>();
+
+            builder.RegisterType<GeneralGiftAidCalculator>().As<IGiftAidCalculator>();
+            builder.RegisterType<SwimmingGiftAidCalculator>().As<IGiftAidCalculator>();
 
             builder.RegisterType<GiftAidController>().UsingConstructor(typeof(IGiftAidOrchestrationService),typeof(IRequestValidator)).InstancePerRequest();
 
