@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Services;
 
-namespace DemoApplication.Infrastructure
+namespace DemoApplication.Infrastructure.GiftAid
 {
     public interface IGiftAidCalculatorFinder
     {

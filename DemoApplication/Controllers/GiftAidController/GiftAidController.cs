@@ -2,6 +2,7 @@
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
+using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Services;
 
 namespace DemoApplication.Controllers.GiftAidController

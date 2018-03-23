@@ -201,8 +201,6 @@
     <Compile Include="Controllers\GiftAidController\GiftAidResponse.cs" />
     <Compile Include="Controllers\HealthCheck\HealthCheckController.cs" />
     <Compile Include="Controllers\RequestValidator.cs" />
-    <Compile Include="Controllers\TaxRateService.cs" />
-    <Compile Include="Controllers\TaxRate\TaxRateController.cs" />
     <Compile Include="ErrorHandler\GlobalExceptionHandlers.cs" />
     <Compile Include="ErrorHandler\GlobalExceptionLogger.cs" />
     <Compile Include="Global.asax.cs">

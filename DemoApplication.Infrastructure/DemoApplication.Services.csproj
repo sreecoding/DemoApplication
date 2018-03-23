@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GiftAidCalculatorFinder.cs" />
+    <Compile Include="GiftAid\GiftAidCalculatorFinder.cs" />
     <Compile Include="GiftAid\SwimmingGiftAidCalculator.cs" />
     <Compile Include="HealthCheck\HealthCheckFactory.cs" />
     <Compile Include="HealthCheck\HealthCheckOutput.cs" />
@@ -68,7 +68,7 @@
     <Compile Include="HealthCheck\HealthCheckResponseBuilder.cs" />
     <Compile Include="HealthCheck\HealthCheckService.cs" />
     <Compile Include="GiftAid\GeneralGiftAidCalculator.cs" />
-    <Compile Include="GiftAidOrchestrationService.cs" />
+    <Compile Include="GiftAid\GiftAidOrchestrationService.cs" />
     <Compile Include="GiftAid\IGiftAidCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

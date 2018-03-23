@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAidController;
+using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

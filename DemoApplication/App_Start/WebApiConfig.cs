@@ -12,6 +12,7 @@ using DemoApplication.Controllers.GiftAidController;
 using DemoApplication.Controllers.HealthCheck;
 using DemoApplication.ErrorHandler;
 using DemoApplication.Infrastructure;
+using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Infrastructure.HealthCheck;
 using DemoApplication.Repositories;
 using Swashbuckle.Application;

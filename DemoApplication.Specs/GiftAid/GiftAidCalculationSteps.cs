@@ -4,6 +4,7 @@ using System.Web.Http.Results;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAidController;
 using DemoApplication.Infrastructure;
+using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Repositories;
 using DemoApplication.Services;
 using Moq;

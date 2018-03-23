@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DemoApplication.Infrastructure;
+using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Repositories;
 using DemoApplication.Services;
 using Moq;
@@ -15,6 +16,8 @@ namespace DemoApplication.Tests.Services.GiftAid
         private Mock<ITaxRepository> _taxRepository;
         private Mock<IGiftAidCalculatorFinder> _giftAidCalculatorFinder;
         private Mock<IGiftAidCalculator> _mockGiftAidCalculator;
+        private TaxData _taxData;
+        private List<TaxData> _taxList;
 
         [SetUp]
         public void Setup()
@@ -23,42 +26,39 @@ namespace DemoApplication.Tests.Services.GiftAid
             _taxRepository = new Mock<ITaxRepository>();
             _mockGiftAidCalculator = new Mock<IGiftAidCalculator>();
             _giftAidOrchestrationService = new GiftAidOrchestrationService(_taxRepository.Object,_giftAidCalculatorFinder.Object);
+
+            _taxData = new TaxData { Country = "UK", TaxRate = 20 };
+            _taxList = new List<TaxData> { _taxData };
+
+            _taxRepository.Setup(x => x.GetTaxRate("UK"))
+                .Returns(_taxList);
         }
 
         [Test]
-        public void GivenGeneralDonationandCountry_ReturnsGiftAid()
+        [TestCase("General","UK",25)]
+        [TestCase("Swimming", "UK", 30)]
+        public void GivenGeneralDonationandCountry_ReturnsGiftAid(string eventType, string country, int giftAidValue)
         {
-            var taxData = new TaxData {Country = "UK", TaxRate = 20};
-            var taxList = new List<TaxData> {taxData};
-            
-            _taxRepository.Setup(x => x.GetTaxRate("UK"))
-                .Returns(taxList);
+            _giftAidCalculatorFinder.Setup(x => x.Find(eventType)).Returns(_mockGiftAidCalculator.Object);
 
-            _giftAidCalculatorFinder.Setup(x => x.Find("General")).Returns(_mockGiftAidCalculator.Object);
+            _mockGiftAidCalculator.Setup(x => x.Calculate(100, country, _taxData)).Returns(giftAidValue);
 
-            _mockGiftAidCalculator.Setup(x => x.Calculate(100, "UK", taxData)).Returns(25);
+            var giftAid = _giftAidOrchestrationService.CalculateGiftAid(100, country,eventType);
 
-            var giftAid = _giftAidOrchestrationService.CalculateGiftAid(100, "UK","General");
-
-            giftAid.ShouldBe(25);
+            giftAid.ShouldBe(giftAidValue);
         }
 
         [Test]
-        public void GivenSwimmingDonationandCountry_ReturnsGiftAid()
+        [TestCase("General")]
+        [TestCase("Swimming")]
+        public void GivenNoTaxRateForCountry_ReturnsGiftAidAsZero(string eventType)
         {
-            var taxData = new TaxData { Country = "UK", TaxRate = 20 };
-            var taxList = new List<TaxData> { taxData };
+            _taxRepository.Setup(x => x.GetTaxRate("US"))
+                .Returns(new List<TaxData>());
 
-            _taxRepository.Setup(x => x.GetTaxRate("UK"))
-                .Returns(taxList);
+            var giftAid = _giftAidOrchestrationService.CalculateGiftAid(100, "US", eventType);
 
-            _giftAidCalculatorFinder.Setup(x => x.Find("Swimming")).Returns(_mockGiftAidCalculator.Object);
-
-            _mockGiftAidCalculator.Setup(x => x.Calculate(100, "UK", taxData)).Returns(30);
-
-            var giftAid = _giftAidOrchestrationService.CalculateGiftAid(100, "UK", "Swimming");
-
-            giftAid.ShouldBe(30);
+            giftAid.ShouldBe(0);
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DemoApplication.Infrastructure;
+﻿using System.Linq;
 using DemoApplication.Repositories;
 
-namespace DemoApplication.Services
+namespace DemoApplication.Infrastructure.GiftAid
 {
     public interface IGiftAidOrchestrationService
     {
