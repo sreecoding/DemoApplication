@@ -47,6 +47,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\DemoApplication.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Asos.Identity.Core.Api.Authentication, Version=4.1.2.0, Culture=neutral, processorArchitecture=MSIL">

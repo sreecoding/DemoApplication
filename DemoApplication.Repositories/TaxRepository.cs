@@ -3,13 +3,14 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using Dapper;
 
 namespace DemoApplication.Repositories
 {
     public interface ITaxRepository
     {
-        IEnumerable<TaxData> GetTaxRate(string uk);
+        Task<List<TaxData>> GetTaxRate(string uk);
     }
 
     public class TaxRepository : ITaxRepository
@@ -17,12 +18,12 @@ namespace DemoApplication.Repositories
         public string ConnectionString = ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString;
 
 
-        public IEnumerable<TaxData> GetTaxRate(string uk)
+        public Task<List<TaxData>> GetTaxRate(string uk)
         {
            using (IDbConnection db = new SqlConnection(ConnectionString))
             {
                 string readSp = "GetAllTaxData";
-                return db.Query<TaxData>(readSp, commandType: CommandType.StoredProcedure).ToList();
+                return Task.FromResult(db.Query<TaxData>(readSp, commandType: CommandType.StoredProcedure).ToList());
             }
         }
     }

@@ -1,11 +1,12 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using DemoApplication.Repositories;
 
 namespace DemoApplication.Infrastructure.GiftAid
 {
     public interface IGiftAidOrchestrationService
     {
-        decimal CalculateGiftAid(decimal donationAmount, string country, string eventType);
+        Task<decimal> CalculateGiftAid(decimal donationAmount, string country, string eventType);
     }
 
     public class GiftAidOrchestrationService : IGiftAidOrchestrationService
@@ -19,9 +20,9 @@ namespace DemoApplication.Infrastructure.GiftAid
             _giftAidCalculatorFinder = giftAidCalculatorFinder;
         }
 
-        public decimal CalculateGiftAid(decimal donationAmount, string country, string eventType)
+        public async Task<decimal> CalculateGiftAid(decimal donationAmount, string country, string eventType)
         {
-            var taxList = _taxRepository.GetTaxRate(country).ToList();
+            var taxList = await _taxRepository.GetTaxRate(country);
 
             if (!taxList.Any())
                 return 0;

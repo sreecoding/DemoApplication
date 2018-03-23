@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAidController;
@@ -29,12 +31,12 @@ namespace DemoApplication.Tests.Controllers
         [Test]
         [TestCase("General",25)]
         [TestCase("Swimming",30)]
-        public void GivenDonation_ThenCalculatesGiftAid(string eventType, int giftAidValue)
+        public async Task GivenDonation_ThenCalculatesGiftAid(string eventType, Decimal giftAidValue)
         {
             mockGiftAidService.Setup(x => x.CalculateGiftAid(100, "UK", eventType))
-                .Returns(giftAidValue);
+                .Returns(Task.FromResult(giftAidValue));
 
-            var giftAid = (NegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(100, "UK",eventType);
+            var giftAid = (NegotiatedContentResult<GiftAidResponse>)await giftAidController.GetGiftAid(100, "UK",eventType);
 
             giftAid.Content.GiftAidAmount.ShouldBe(giftAidValue);
         }
@@ -43,9 +45,9 @@ namespace DemoApplication.Tests.Controllers
         [TestCase(1000,"","General")]
         [TestCase(0,"UK","General")]
         [TestCase(1000,"UK","Invalid")]
-        public void GivenInvalidInputs_ReturnsValidationError(int donationAmount, string country, string eventType)
+        public async Task GivenInvalidInputs_ReturnsValidationError(int donationAmount, string country, string eventType)
         {
-            var giftAidResponse = (NegotiatedContentResult<GiftAidResponse>)giftAidController.GetGiftAid(donationAmount, country, eventType);
+            var giftAidResponse = (NegotiatedContentResult<GiftAidResponse>) await giftAidController.GetGiftAid(donationAmount, country, eventType);
 
             giftAidResponse.StatusCode.ShouldBe(HttpStatusCode.BadRequest); 
             giftAidResponse.Content.ValidationErrors.Count.ShouldBe(1);

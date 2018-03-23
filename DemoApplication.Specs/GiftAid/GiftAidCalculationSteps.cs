@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAidController;
@@ -31,7 +33,7 @@ namespace DemoApplication.Specs.GiftAid
         {
             var taxData = table.CreateSet<TaxData>();
             _taxRepository = new Mock<ITaxRepository>();
-            _taxRepository.Setup(x => x.GetTaxRate("UK")).Returns(taxData);
+            _taxRepository.Setup(x => x.GetTaxRate("UK")).Returns(Task.FromResult(taxData.ToList()));
         }
 
         [Given(@"the Donation Amount is (.*) pounds")]
@@ -53,14 +55,14 @@ namespace DemoApplication.Specs.GiftAid
         }
 
         [When(@"I make the Donation")]
-        public void WhenIMakeTheDonation()
+        public async void WhenIMakeTheDonation()
         {
             _giftAidOrchestrationService =
                 new GiftAidOrchestrationService(_taxRepository.Object, new GiftAidCalculatorFinder());
 
             _giftAidController = new GiftAidController(_giftAidOrchestrationService, new RequestValidator());
 
-            _result = (NegotiatedContentResult<GiftAidResponse>)_giftAidController.GetGiftAid(_donation, _country, _event);
+            _result = (NegotiatedContentResult<GiftAidResponse>)await _giftAidController.GetGiftAid(_donation, _country, _event);
         }
 
         [Then(@"the Total Gift Aid Amount Should be (.*) pounds")]

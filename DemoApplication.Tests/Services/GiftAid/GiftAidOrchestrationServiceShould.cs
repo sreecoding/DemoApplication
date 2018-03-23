@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DemoApplication.Infrastructure;
 using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Repositories;
@@ -31,19 +32,19 @@ namespace DemoApplication.Tests.Services.GiftAid
             _taxList = new List<TaxData> { _taxData };
 
             _taxRepository.Setup(x => x.GetTaxRate("UK"))
-                .Returns(_taxList);
+                .Returns(Task.FromResult(_taxList));
         }
 
         [Test]
         [TestCase("General","UK",25)]
         [TestCase("Swimming", "UK", 30)]
-        public void GivenGeneralDonationandCountry_ReturnsGiftAid(string eventType, string country, int giftAidValue)
+        public async Task GivenGeneralDonationandCountry_ReturnsGiftAid(string eventType, string country, int giftAidValue)
         {
             _giftAidCalculatorFinder.Setup(x => x.Find(eventType)).Returns(_mockGiftAidCalculator.Object);
 
             _mockGiftAidCalculator.Setup(x => x.Calculate(100, country, _taxData)).Returns(giftAidValue);
 
-            var giftAid = _giftAidOrchestrationService.CalculateGiftAid(100, country,eventType);
+            var giftAid = await _giftAidOrchestrationService.CalculateGiftAid(100, country,eventType);
 
             giftAid.ShouldBe(giftAidValue);
         }
@@ -51,12 +52,12 @@ namespace DemoApplication.Tests.Services.GiftAid
         [Test]
         [TestCase("General")]
         [TestCase("Swimming")]
-        public void GivenNoTaxRateForCountry_ReturnsGiftAidAsZero(string eventType)
+        public async Task GivenNoTaxRateForCountry_ReturnsGiftAidAsZero(string eventType)
         {
             _taxRepository.Setup(x => x.GetTaxRate("US"))
-                .Returns(new List<TaxData>());
+                .Returns(Task.FromResult(new List<TaxData>()));
 
-            var giftAid = _giftAidOrchestrationService.CalculateGiftAid(100, "US", eventType);
+            var giftAid = await _giftAidOrchestrationService.CalculateGiftAid(100, "US", eventType);
 
             giftAid.ShouldBe(0);
         }

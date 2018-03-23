@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DemoApplication.Infrastructure.GiftAid;
@@ -33,14 +34,14 @@ namespace DemoApplication.Controllers.GiftAidController
         [HttpGet]
         [Route("GiftAid/GetGiftAid")]
         [ResponseType(typeof(GiftAidResponse))]
-        public IHttpActionResult GetGiftAid(decimal donationAmount, string country, string eventType)
+        public async Task<IHttpActionResult> GetGiftAid(decimal donationAmount, string country, string eventType)
         {
             var validationErrors = _requestValidator.Validate(donationAmount, country,eventType);
 
             if (validationErrors.Any())
                 return Content(HttpStatusCode.BadRequest, new GiftAidResponse(0, validationErrors));
 
-            var giftAidAmount = _giftAidOrchestrationService.CalculateGiftAid(donationAmount, country, eventType);
+            var giftAidAmount = await _giftAidOrchestrationService.CalculateGiftAid(donationAmount, country, eventType);
 
             return Content(HttpStatusCode.OK,new GiftAidResponse(giftAidAmount,validationErrors));
         }
