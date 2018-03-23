@@ -2,7 +2,6 @@
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DemoApplication.Controllers.GiftAidController;
 using DemoApplication.Infrastructure.HealthCheck;
 
 namespace DemoApplication.Controllers.HealthCheck

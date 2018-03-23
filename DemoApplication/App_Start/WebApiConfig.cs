@@ -4,7 +4,7 @@ using System.Web.Http.ExceptionHandling;
 using Autofac;
 using Autofac.Integration.WebApi;
 using DemoApplication.Controllers;
-using DemoApplication.Controllers.GiftAidController;
+using DemoApplication.Controllers.GiftAid;
 using DemoApplication.Controllers.HealthCheck;
 using DemoApplication.ErrorHandler;
 using DemoApplication.Infrastructure.GiftAid;

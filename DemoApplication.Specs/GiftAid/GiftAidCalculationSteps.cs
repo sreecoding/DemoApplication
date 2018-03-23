@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
-using DemoApplication.Controllers.GiftAidController;
+using DemoApplication.Controllers.GiftAid;
 using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Repositories;
 using DemoApplication.Services;

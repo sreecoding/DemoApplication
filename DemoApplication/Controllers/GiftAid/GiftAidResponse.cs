@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace DemoApplication.Controllers.GiftAidController
+namespace DemoApplication.Controllers.GiftAid
 {
     /// <summary>
     /// GiftAid

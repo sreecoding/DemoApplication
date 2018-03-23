@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DemoApplication.Infrastructure.GiftAid;
-using DemoApplication.Services;
 
-namespace DemoApplication.Controllers.GiftAidController
+namespace DemoApplication.Controllers.GiftAid
 {
    [RoutePrefix("api")]
     public class GiftAidController : ApiController
