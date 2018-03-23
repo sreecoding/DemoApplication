@@ -108,12 +108,6 @@
     </Compile>
     <Compile Include="HealthCheck\HealthCheckSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaxRate\SaveTaxRate.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SaveTaxRate.feature</DependentUpon>
-    </Compile>
-    <Compile Include="TaxRate\SaveTaxRateSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -126,10 +120,6 @@
       <LastGenOutput>HealthCheck.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="TaxRate\SaveTaxRate.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SaveTaxRate.feature.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DemoApplication.Infrastructure\DemoApplication.Services.csproj">

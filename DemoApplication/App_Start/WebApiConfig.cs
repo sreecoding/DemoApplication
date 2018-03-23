@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using Autofac;
 using Autofac.Integration.WebApi;
@@ -19,9 +20,6 @@ namespace DemoApplication
     {
         public static void Register(HttpConfiguration config)
         {
-            // SetupAzureActiveDirectoryAuthentication(config);
-            // config.Filters.Add(new AuthorizeAttribute());
-
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
             config.Services.Replace(typeof(IExceptionLogger), new GlobalExceptionLogger());
@@ -31,12 +29,19 @@ namespace DemoApplication
 
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "Swagger UI",
-                routeTemplate: "",
-                defaults: null,
-                constraints: null,
-                handler: new RedirectHandler(SwaggerDocsConfig.DefaultRootUrlResolver, "swagger/ui/index"));
+            try
+            {
+                config.Routes.MapHttpRoute(
+                    name: "Swagger UI",
+                    routeTemplate: "",
+                    defaults: null,
+                    constraints: null,
+                    handler: new RedirectHandler(SwaggerDocsConfig.DefaultRootUrlResolver, "swagger/ui/index"));
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         private static void BuildDependencyResolver()
@@ -62,12 +67,6 @@ namespace DemoApplication
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
-
-        //public static void SetupAzureActiveDirectoryAuthentication(HttpConfiguration config)
-        //{
-        //    var settings = new ApiSecuritySettingsFactory().Create();
-        //    config.SecureApiUsingJwtBearerToken(settings);
-        //}
     }
 
     

@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.SmokeTests", "DemoApplication.SmokeTests\DemoApplication.SmokeTests.csproj", "{2EDA1AD7-AF02-4D7C-A8E2-506DD3D0DFC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.Domain", "DemoApplication.Domain\DemoApplication.Domain.csproj", "{4DEF2F50-44F6-4113-82F0-90B02206A709}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.Domain", "DemoApplication.DomainObjects\DemoApplication.Domain.csproj", "{0A7B5DD4-F673-46A8-8E9B-D64BE97DE748}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{2EDA1AD7-AF02-4D7C-A8E2-506DD3D0DFC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EDA1AD7-AF02-4D7C-A8E2-506DD3D0DFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EDA1AD7-AF02-4D7C-A8E2-506DD3D0DFC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4DEF2F50-44F6-4113-82F0-90B02206A709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4DEF2F50-44F6-4113-82F0-90B02206A709}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4DEF2F50-44F6-4113-82F0-90B02206A709}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4DEF2F50-44F6-4113-82F0-90B02206A709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A7B5DD4-F673-46A8-8E9B-D64BE97DE748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A7B5DD4-F673-46A8-8E9B-D64BE97DE748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A7B5DD4-F673-46A8-8E9B-D64BE97DE748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A7B5DD4-F673-46A8-8E9B-D64BE97DE748}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

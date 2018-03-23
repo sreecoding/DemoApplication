@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DemoApplication.Domain;
 using DemoApplication.Services;
 
 namespace DemoApplication.Controllers
@@ -26,13 +27,13 @@ namespace DemoApplication.Controllers
             IList<ErrorResponse> errorResponses = new List<ErrorResponse>();
 
             if (String.IsNullOrEmpty(country))
-                errorResponses.Add(new ErrorResponse("country", "Country Cannot be Empty") );
+                errorResponses.Add(new ErrorResponse(GiftAidConstants.InputFields.Country, $"{GiftAidConstants.InputFields.Country} Cannot be Empty") );
 
             if (donationAmount <= 0)
-                errorResponses.Add(new ErrorResponse("donation", "Donation cannot be <= 0"));
+                errorResponses.Add(new ErrorResponse(GiftAidConstants.InputFields.Donation, $"{GiftAidConstants.InputFields.Donation} cannot be <= 0"));
 
             if (!eventTypes.Contains(eventType))
-                errorResponses.Add(new ErrorResponse("eventtype", "Only supported event types are General and Swimming"));
+                errorResponses.Add(new ErrorResponse(GiftAidConstants.InputFields.EventType, $"Only supported event types are {String.Join(",",eventTypes)}"));
 
             return (List<ErrorResponse>) errorResponses;
 

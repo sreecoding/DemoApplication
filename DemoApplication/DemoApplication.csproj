@@ -191,8 +191,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\ApiSecuritySettingsFactory.cs" />
-    <Compile Include="Authentication\AppSettingsReader.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
@@ -235,6 +233,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DemoApplication.DomainObjects\DemoApplication.Domain.csproj">
+      <Project>{0A7B5DD4-F673-46A8-8E9B-D64BE97DE748}</Project>
+      <Name>DemoApplication.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DemoApplication.Infrastructure\DemoApplication.Services.csproj">
       <Project>{47A75F0C-51DC-4D89-982B-F547C694AA1E}</Project>
       <Name>DemoApplication.Services</Name>

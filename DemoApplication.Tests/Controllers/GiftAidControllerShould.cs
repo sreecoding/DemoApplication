@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ using DemoApplication.Controllers.GiftAidController;
 using DemoApplication.Domain;
 using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Services;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
@@ -27,7 +25,10 @@ namespace DemoApplication.Tests.Controllers
         [SetUp]
         public void Setup()
         {
-            _giftAidCalculators = new List<IGiftAidCalculator>() { new GeneralGiftAidCalculator(), new SwimmingGiftAidCalculator() };
+            _giftAidCalculators = new List<IGiftAidCalculator>
+                { new GeneralGiftAidCalculator(),
+                  new SwimmingGiftAidCalculator() };
+
             _mockGiftAidService = new Mock<IGiftAidOrchestrationService>();
             _giftAidController = new GiftAidController(_mockGiftAidService.Object, 
                               new RequestValidator(_giftAidCalculators));

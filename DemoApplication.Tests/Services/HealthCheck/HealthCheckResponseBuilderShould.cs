@@ -10,14 +10,14 @@ namespace DemoApplication.Tests.Services.HealthCheck
     [TestFixture]
     public class HealthCheckResponseBuilderShould
     {
-        private IHealthCheckResponseBuilder healthCheckResponseBuilder;
+        private IHealthCheckResponseBuilder _healthCheckResponseBuilder;
         private HealthCheckResponse _healthCheckResponse;
 
 
         [SetUp]
         public void Setup()
         {
-            healthCheckResponseBuilder = new HealthCheckResponseBuilder();
+            _healthCheckResponseBuilder = new HealthCheckResponseBuilder();
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace DemoApplication.Tests.Services.HealthCheck
                 new HealthCheckOutput() {DependencyName = HealthCheckConstants.SubSystem.SqlDatabase, IsHealthy = isHealthy}
             };
 
-            _healthCheckResponse = healthCheckResponseBuilder.GenerateHealthCheckResponse(healthCheckOutputs);
+            _healthCheckResponse = _healthCheckResponseBuilder.GenerateHealthCheckResponse(healthCheckOutputs);
 
             _healthCheckResponse.IsSystemHealthy.ShouldBe(isHealthy);
 

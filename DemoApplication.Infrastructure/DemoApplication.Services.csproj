@@ -77,8 +77,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DemoApplication.Domain\DemoApplication.Domain.csproj">
-      <Project>{4DEF2F50-44F6-4113-82F0-90B02206A709}</Project>
+    <ProjectReference Include="..\DemoApplication.DomainObjects\DemoApplication.Domain.csproj">
+      <Project>{0A7B5DD4-F673-46A8-8E9B-D64BE97DE748}</Project>
       <Name>DemoApplication.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\DemoApplication.Repositories\DemoApplication.Repositories.csproj">

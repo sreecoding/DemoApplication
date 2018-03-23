@@ -1,15 +1,9 @@
-﻿using System;
-using System.Net;
-using System.Web;
-using System.Web.Http;
+﻿using System.Net;
 using System.Web.Http.Results;
-using DemoApplication.Controllers;
 using DemoApplication.Controllers.HealthCheck;
 using DemoApplication.Infrastructure.HealthCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
-using Shouldly;
 
 namespace DemoApplication.Tests.Controllers
 {
