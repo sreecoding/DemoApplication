@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using DemoApplication.Domain;
 using DemoApplication.Infrastructure.GiftAid;
-using DemoApplication.Services;
 using NUnit.Framework;
 
-namespace DemoApplication.Tests.Services.GiftAid
+namespace DemoApplication.Services.Test.GiftAid
 {
     [TestFixture]
     public class GiftAidCalculatorFinderShould

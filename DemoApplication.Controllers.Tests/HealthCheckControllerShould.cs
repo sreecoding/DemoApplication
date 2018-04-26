@@ -5,7 +5,7 @@ using DemoApplication.Infrastructure.HealthCheck;
 using Moq;
 using NUnit.Framework;
 
-namespace DemoApplication.Tests.Controllers
+namespace DemoApplication.Controllers.Tests
 {
     [TestFixture]
     public class HealthCheckControllerShould
@@ -21,7 +21,7 @@ namespace DemoApplication.Tests.Controllers
             _healthCheckController = new HealthCheckController(_mockHealthCheckService.Object);
         }
 
-        [Test]
+        
         [TestCase(true,ExpectedResult = HttpStatusCode.OK)]
         [TestCase(false,ExpectedResult = HttpStatusCode.InternalServerError)]
         public HttpStatusCode GivenHealthySystem_ReturnStatusOK(bool isSystemHealthy)

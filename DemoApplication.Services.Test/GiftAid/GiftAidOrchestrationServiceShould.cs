@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DemoApplication.Domain;
-using DemoApplication.Infrastructure;
 using DemoApplication.Infrastructure.GiftAid;
 using DemoApplication.Repositories;
-using DemoApplication.Services;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DemoApplication.Tests.Services.GiftAid
+namespace DemoApplication.Services.Test.GiftAid
 {
     [TestFixture]
     public class GiftAidOrchestrationServiceShould

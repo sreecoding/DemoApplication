@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Dapper;
 
 namespace DemoApplication.Repositories
-{
+{   
     public interface ITaxRepository
     {
         Task<List<TaxData>> GetTaxRate(string uk);
@@ -18,12 +18,12 @@ namespace DemoApplication.Repositories
         public string ConnectionString = ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString;
 
 
-        public Task<List<TaxData>> GetTaxRate(string uk)
+        public async Task<List<TaxData>> GetTaxRate(string uk)
         {
            using (IDbConnection db = new SqlConnection(ConnectionString))
             {
                 string readSp = "GetAllTaxData";
-                return Task.FromResult(db.Query<TaxData>(readSp, commandType: CommandType.StoredProcedure).ToList());
+                return (await db.QueryAsync<TaxData>(readSp, commandType: CommandType.StoredProcedure)) .ToList();
             }
         }
     }

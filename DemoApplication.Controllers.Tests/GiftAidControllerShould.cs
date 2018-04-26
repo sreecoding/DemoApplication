@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAid;
 using DemoApplication.Domain;
 using DemoApplication.Infrastructure.GiftAid;
@@ -13,7 +12,7 @@ using Moq;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DemoApplication.Tests.Controllers
+namespace DemoApplication.Controllers.Tests
 {
     [TestFixture]
     public class GiftAidControllerShould
@@ -34,7 +33,7 @@ namespace DemoApplication.Tests.Controllers
                               new RequestValidator(_giftAidCalculators));
         }
 
-        [Test]
+       
         [TestCase(GiftAidConstants.EventTypes.General,25)]
         [TestCase(GiftAidConstants.EventTypes.Swimming, 30)]
         public async Task GivenDonation_ThenCalculatesGiftAid(string eventType, Decimal giftAidValue)
@@ -48,7 +47,6 @@ namespace DemoApplication.Tests.Controllers
             giftAid.Content.ValidationErrors.Count.ShouldBe(0);
         }
 
-        [Test]
         [TestCase(1000,"", GiftAidConstants.EventTypes.General)]
         [TestCase(0,"UK", GiftAidConstants.EventTypes.General)]
         [TestCase(1000,"UK","Invalid")]

@@ -5,7 +5,7 @@ using DemoApplication.Infrastructure.HealthCheck;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DemoApplication.Tests.Services.HealthCheck
+namespace DemoApplication.Services.Test.HealthCheck
 {
     [TestFixture]
     public class HealthCheckResponseBuilderShould

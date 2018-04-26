@@ -26,7 +26,7 @@ namespace DemoApplication.Controllers
 
             IList<ErrorResponse> errorResponses = new List<ErrorResponse>();
 
-            if (String.IsNullOrEmpty(country))
+            if (String.IsNullOrEmpty(country)) 
                 errorResponses.Add(new ErrorResponse(GiftAidConstants.InputFields.Country, $"{GiftAidConstants.InputFields.Country} Cannot be Empty") );
 
             if (donationAmount <= 0)

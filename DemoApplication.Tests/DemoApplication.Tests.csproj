@@ -117,8 +117,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\GiftAidControllerShould.cs" />
-    <Compile Include="Controllers\HealthCheckControllerShould.cs" />
     <Compile Include="Services\GiftAid\SwimmingGiftAidCalculatorShould.cs" />
     <Compile Include="Services\GiftAid\GeneralGiftAidCalculatorShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
