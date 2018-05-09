@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DemoApplication.Infrastructure.HealthCheck;
+using DemoApplication.Services.HealthCheck;
 using DemoApplication.Repositories;
 using Moq;
 using NUnit.Framework;
@@ -31,6 +31,7 @@ namespace DemoApplication.Services.Test.HealthCheck
                 .Returns(healthStatus);
 
             _healthCheckOutputs = _healthCheckFactory.GenerateHealthCheckOutputs();
+
             _healthCheckOutputs[0].IsHealthy.ShouldBe(healthStatus);
         }
     }

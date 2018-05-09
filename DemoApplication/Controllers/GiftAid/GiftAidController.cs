@@ -1,9 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DemoApplication.Infrastructure.GiftAid;
+using DemoApplication.Services.GiftAid;
 
 namespace DemoApplication.Controllers.GiftAid
 {
@@ -38,14 +39,21 @@ namespace DemoApplication.Controllers.GiftAid
             var validationErrors = _requestValidator.Validate(donationAmount, country,eventType);
 
             if (validationErrors.Any())
-                return Content(HttpStatusCode.BadRequest, new GiftAidResponse(0, validationErrors));
+                return Content(HttpStatusCode.BadRequest, new GiftAidErrorResponse(validationErrors));
 
             var giftAidAmount = await _giftAidOrchestrationService.CalculateGiftAid(donationAmount, country, eventType);
 
-            return Content(HttpStatusCode.OK,new GiftAidResponse(giftAidAmount,validationErrors));
+            return Content(HttpStatusCode.OK,new GiftAidResponse(giftAidAmount));
         }
     }
-  
 
-  
+    public class GiftAidErrorResponse
+    {
+        public GiftAidErrorResponse(List<ErrorResponse> validationErrors)
+        {
+            ValidationErrors = validationErrors;
+        }
+
+        public IList<ErrorResponse> ValidationErrors { get; }
+    }
 }

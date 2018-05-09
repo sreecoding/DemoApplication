@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using DemoApplication.Controllers;
 using DemoApplication.Domain;
-using DemoApplication.Infrastructure.HealthCheck;
+using DemoApplication.Services.HealthCheck;
 using NUnit.Framework;
 using Shouldly;
 

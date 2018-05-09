@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Results;
 using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAid;
-using DemoApplication.Infrastructure.GiftAid;
+using DemoApplication.Services.GiftAid;
 using DemoApplication.Repositories;
 using DemoApplication.Services;
 using Moq;
@@ -61,7 +61,7 @@ namespace DemoApplication.Specs.GiftAid
 
             _giftAidOrchestrationService =new GiftAidOrchestrationService(_taxRepository.Object, new GiftAidCalculatorFinder(_giftAidCalculators));
 
-            _giftAidController = new GiftAidController(_giftAidOrchestrationService, new RequestValidator(_giftAidCalculators));
+            _giftAidController = new GiftAidController(_giftAidOrchestrationService, new RequestValidator(_giftAidCalculators,new CountryService(null)));
 
             _result = (NegotiatedContentResult<GiftAidResponse>)await _giftAidController.GetGiftAid(_donation, _country, _event);
         }

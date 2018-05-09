@@ -1,35 +1,38 @@
 ﻿using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using RestSharp;
 using Shouldly;
 using TechTalk.SpecFlow;
+using HttpResponse = System.Web.HttpResponse;
 
 namespace DemoApplication.SmokeTests.HealthCheck
 {
     [Binding]
     public class HealthCheckSteps
     {
-        private const string HealthcheckEndpoint = "/api/HealthCheck/Get";
+        private const string HealthcheckEndpoint = "http://localhost:63094/api/HealthCheck/Get";
         private const string BaseUrl = "http://localhost:63094";
         //private  readonly string BaseUrl = ConfigurationManager.AppSettings["BaseUrl"];
 
-        private RestRequest _request;
-        private IRestResponse _restResponse;
+        private HttpRequest _request;
+        private HttpResponseMessage _httpResponseMessage;
 
        
         [When(@"I call the HealthCheck EndPoint")]
-        public void WhenICallTheHealthCheckEndPoint()
+        public async Task WhenICallTheHealthCheckEndPoint()
         {
-            _request = new RestRequest(HealthcheckEndpoint, Method.GET);
-            var client = new RestClient(BaseUrl);
-            _restResponse = client.Execute(_request);
-
+           using (var client = new HttpClient())
+           {
+                _httpResponseMessage = await client.GetAsync(HealthcheckEndpoint);
+           }
         }
 
         [Then(@"the result should be that the system is up")]
         public void ThenTheResultShouldBeThatTheSystemIsUp()
         {
-            _restResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
-            
+            _httpResponseMessage.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
         
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Results;
 using DemoApplication.Controllers.GiftAid;
 using DemoApplication.Domain;
-using DemoApplication.Infrastructure.GiftAid;
+using DemoApplication.Services.GiftAid;
 using DemoApplication.Services;
 using Moq;
 using NUnit.Framework;
@@ -20,17 +20,24 @@ namespace DemoApplication.Controllers.Tests
         private Mock<IGiftAidOrchestrationService> _mockGiftAidService;
         private GiftAidController _giftAidController;
         private List<IGiftAidCalculator> _giftAidCalculators;
+        private Mock<ICountryService> _countryService;
+        private Mock<ICountryRepository> _countryRepository;
+
 
         [SetUp]
         public void Setup()
         {
+
+            _countryRepository = new Mock<ICountryRepository>();
+            _countryService = new Mock<ICountryService>(_countryRepository.Object);
+
             _giftAidCalculators = new List<IGiftAidCalculator>
                 { new GeneralGiftAidCalculator(),
                   new SwimmingGiftAidCalculator() };
 
             _mockGiftAidService = new Mock<IGiftAidOrchestrationService>();
             _giftAidController = new GiftAidController(_mockGiftAidService.Object, 
-                              new RequestValidator(_giftAidCalculators));
+                              new RequestValidator(_giftAidCalculators,_countryService.Object));
         }
 
        
@@ -44,7 +51,6 @@ namespace DemoApplication.Controllers.Tests
             var giftAid = (NegotiatedContentResult<GiftAidResponse>)await _giftAidController.GetGiftAid(100, "UK",eventType);
 
             giftAid.Content.GiftAidAmount.ShouldBe(giftAidValue);
-            giftAid.Content.ValidationErrors.Count.ShouldBe(0);
         }
 
         [TestCase(1000,"", GiftAidConstants.EventTypes.General)]
@@ -52,7 +58,7 @@ namespace DemoApplication.Controllers.Tests
         [TestCase(1000,"UK","Invalid")]
         public async Task GivenInvalidInputs_ReturnsValidationError(int donationAmount, string country, string eventType)
         {
-            var giftAidResponse = (NegotiatedContentResult<GiftAidResponse>) await _giftAidController.GetGiftAid(donationAmount, country, eventType);
+            var giftAidResponse = (NegotiatedContentResult<GiftAidErrorResponse>) await _giftAidController.GetGiftAid(donationAmount, country, eventType);
 
             giftAidResponse.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 

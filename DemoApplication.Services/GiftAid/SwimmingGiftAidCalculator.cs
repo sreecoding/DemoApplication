@@ -2,7 +2,7 @@
 using DemoApplication.Repositories;
 using DemoApplication.Services;
 
-namespace DemoApplication.Infrastructure.GiftAid
+namespace DemoApplication.Services.GiftAid
 {
     public class SwimmingGiftAidCalculator : IGiftAidCalculator
     {

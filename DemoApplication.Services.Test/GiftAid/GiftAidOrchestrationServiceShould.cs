@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DemoApplication.Domain;
-using DemoApplication.Infrastructure.GiftAid;
+using DemoApplication.Services.GiftAid;
 using DemoApplication.Repositories;
 using Moq;
 using NUnit.Framework;

@@ -7,20 +7,15 @@ namespace DemoApplication.Controllers.GiftAid
     /// </summary>
     public class GiftAidResponse
     {
-        public GiftAidResponse(decimal giftAidAmount, IList<ErrorResponse> validationErrors)
+        public GiftAidResponse(decimal giftAidAmount)
         {
             GiftAidAmount = giftAidAmount;
-            ValidationErrors = validationErrors;
         }
 
         /// <summary>
         /// GiftAid Amount
         /// </summary>
         public decimal GiftAidAmount { get; }
-
-        /// <summary>
-        /// Input Validation Errors
-        /// </summary>
-        public IList<ErrorResponse> ValidationErrors { get; }
+        
     }
 }

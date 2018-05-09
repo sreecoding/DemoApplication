@@ -1,4 +1,4 @@
-using DemoApplication.Infrastructure.GiftAid;
+using DemoApplication.Services.GiftAid;
 using DemoApplication.Repositories;
 using NUnit.Framework;
 using Shouldly;

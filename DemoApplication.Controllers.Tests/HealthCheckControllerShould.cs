@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Web.Http.Results;
 using DemoApplication.Controllers.HealthCheck;
-using DemoApplication.Infrastructure.HealthCheck;
+using DemoApplication.Services.HealthCheck;
 using Moq;
 using NUnit.Framework;
 

@@ -52,15 +52,6 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Asos.Identity.Core.Api.Authentication, Version=4.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Asos.Identity.Core.Api.Authentication.4.1.2\lib\net45\Asos.Identity.Core.Api.Authentication.dll</HintPath>
-    </Reference>
-    <Reference Include="Asos.Identity.Core.Claims, Version=4.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Asos.Identity.Core.Claims.4.1.2\lib\net45\Asos.Identity.Core.Claims.dll</HintPath>
-    </Reference>
-    <Reference Include="Asos.Identity.Core.SecurityKeys, Version=4.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Asos.Identity.Core.SecurityKeys.4.1.2\lib\net45\Asos.Identity.Core.SecurityKeys.dll</HintPath>
-    </Reference>
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
@@ -201,6 +192,7 @@
     <Compile Include="Controllers\GiftAid\GiftAidController.cs" />
     <Compile Include="Controllers\GiftAid\GiftAidResponse.cs" />
     <Compile Include="Controllers\HealthCheck\HealthCheckController.cs" />
+    <Compile Include="Controllers\IRequestValidator.cs" />
     <Compile Include="Controllers\RequestValidator.cs" />
     <Compile Include="ErrorHandler\GlobalExceptionHandlers.cs" />
     <Compile Include="ErrorHandler\GlobalExceptionLogger.cs" />
@@ -239,7 +231,7 @@
       <Project>{0A7B5DD4-F673-46A8-8E9B-D64BE97DE748}</Project>
       <Name>DemoApplication.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DemoApplication.Infrastructure\DemoApplication.Services.csproj">
+    <ProjectReference Include="..\DemoApplication.Services\DemoApplication.Services.csproj">
       <Project>{47A75F0C-51DC-4D89-982B-F547C694AA1E}</Project>
       <Name>DemoApplication.Services</Name>
     </ProjectReference>

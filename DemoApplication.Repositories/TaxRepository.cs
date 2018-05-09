@@ -7,30 +7,22 @@ using System.Threading.Tasks;
 using Dapper;
 
 namespace DemoApplication.Repositories
-{   
-    public interface ITaxRepository
-    {
-        Task<List<TaxData>> GetTaxRate(string uk);
-    }
-
+{
     public class TaxRepository : ITaxRepository
     {
         public string ConnectionString = ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString;
 
-
-        public async Task<List<TaxData>> GetTaxRate(string uk)
+        public async Task<List<TaxData>> GetTaxRate(string countryCode)
         {
            using (IDbConnection db = new SqlConnection(ConnectionString))
-            {
-                string readSp = "GetAllTaxData";
-                return (await db.QueryAsync<TaxData>(readSp, commandType: CommandType.StoredProcedure)) .ToList();
-            }
-        }
-    }
+           {
+               const string taxRateStoredProcedure = "GetTaxRateByCountryCode";
 
-    public class TaxData
-    {
-        public string Country;
-        public decimal TaxRate;
+               var countryCodeParameter = new DynamicParameters();
+               countryCodeParameter.Add("@CountryCode", countryCode);
+
+                return (await db.QueryAsync<TaxData>(taxRateStoredProcedure, countryCodeParameter, commandType: CommandType.StoredProcedure)) .ToList();
+           }
+        }
     }
 }

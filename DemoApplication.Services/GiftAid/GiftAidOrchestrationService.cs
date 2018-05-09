@@ -2,13 +2,8 @@
 using System.Threading.Tasks;
 using DemoApplication.Repositories;
 
-namespace DemoApplication.Infrastructure.GiftAid
+namespace DemoApplication.Services.GiftAid
 {
-    public interface IGiftAidOrchestrationService
-    {
-        Task<decimal> CalculateGiftAid(decimal donationAmount, string country, string eventType);
-    }
-
     public class GiftAidOrchestrationService : IGiftAidOrchestrationService
     {
         private readonly ITaxRepository _taxRepository;

@@ -2,13 +2,8 @@
 using DemoApplication.Domain;
 using DemoApplication.Repositories;
 
-namespace DemoApplication.Infrastructure.HealthCheck
+namespace DemoApplication.Services.HealthCheck
 {
-    public interface IHealthCheckFactory
-    {
-        IList<HealthCheckOutput> GenerateHealthCheckOutputs();
-    }
-
     public class HealthCheckFactory : IHealthCheckFactory
     {
         private readonly IDatabaseCheck _databaseConnection;

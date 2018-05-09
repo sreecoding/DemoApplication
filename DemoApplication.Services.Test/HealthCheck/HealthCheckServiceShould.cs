@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DemoApplication.Controllers;
 using DemoApplication.Domain;
-using DemoApplication.Infrastructure.HealthCheck;
+using DemoApplication.Services.HealthCheck;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
@@ -16,7 +15,6 @@ namespace DemoApplication.Services.Test.HealthCheck
         private Mock<IHealthCheckFactory> _mockHealthCheckfactory;
         private Mock<IHealthCheckResponseBuilder> _mockHealthCheckResponseBuilder;
         private HealthCheckResponse _subSystemHealthCheckResponse;
-        private List<HealthCheckOutput> _subSystemHealthCheckOutputs;
 
         [SetUp]
         public void Setup()
@@ -26,10 +24,7 @@ namespace DemoApplication.Services.Test.HealthCheck
 
             _healthCheckService = new HealthCheckService(_mockHealthCheckfactory.Object,
                                                     _mockHealthCheckResponseBuilder.Object);
-            _subSystemHealthCheckOutputs = new List<HealthCheckOutput>
-                { new HealthCheckOutput { DependencyName = HealthCheckConstants.SubSystem.SqlDatabase, IsHealthy = true } };
         }
-
      
         [TestCase(true)]
         [TestCase(false)]
@@ -43,11 +38,26 @@ namespace DemoApplication.Services.Test.HealthCheck
 
             response.IsSystemHealthy.ShouldBe(isSystemHealthy);
         }
-
         
         [TestCase(true)]
         [TestCase(false)]
-        public void GivenSubSystemHealth_ReturnsCorrectResponse(bool isSystemHealthy)
+        public void GivenSubSystemHealth_ReturnsCorrectHealthStatus(bool isSystemHealthy)
+        {
+            var subSystemOutput = SetupAndCheckHealth(isSystemHealthy);
+
+            subSystemOutput.IsHealthy.ShouldBe(isSystemHealthy);
+        }
+
+        [TestCase(true)]
+        [TestCase(false)]
+        public void GivenSubSystemHealth_ReturnsCorrectDependency(bool isSystemHealthy)
+        {
+            var subSystemOutput = SetupAndCheckHealth(isSystemHealthy);
+
+            subSystemOutput.DependencyName.ShouldBe(HealthCheckConstants.SubSystem.SqlDatabase);
+        }
+
+        private HealthCheckOutput SetupAndCheckHealth(bool isSystemHealthy)
         {
             var healthCheckOutputs = ConfigureHealthCheckOutputs(isSystemHealthy);
 
@@ -55,10 +65,7 @@ namespace DemoApplication.Services.Test.HealthCheck
 
             var response = _healthCheckService.CheckSystemHealth();
 
-            var subSystemOutput = response.SubSystemHealthCheckOutputs.Single();
-
-            subSystemOutput.DependencyName.ShouldBe(HealthCheckConstants.SubSystem.SqlDatabase);
-            subSystemOutput.IsHealthy.ShouldBe(true);
+            return response.SubSystemHealthCheckOutputs.Single();
         }
 
         private void ConfigureHealthCheckResponse(bool isSystemHealthy, List<HealthCheckOutput> healthCheckOutputs)
@@ -66,7 +73,7 @@ namespace DemoApplication.Services.Test.HealthCheck
             _subSystemHealthCheckResponse = new HealthCheckResponse()
             {
                 IsSystemHealthy = isSystemHealthy,
-                SubSystemHealthCheckOutputs =_subSystemHealthCheckOutputs
+                SubSystemHealthCheckOutputs = healthCheckOutputs
             };
 
             _mockHealthCheckResponseBuilder.Setup(x => x.GenerateHealthCheckResponse(healthCheckOutputs))

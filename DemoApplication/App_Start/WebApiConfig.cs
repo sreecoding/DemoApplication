@@ -7,12 +7,12 @@ using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAid;
 using DemoApplication.Controllers.HealthCheck;
 using DemoApplication.ErrorHandler;
-using DemoApplication.Infrastructure.GiftAid;
-using DemoApplication.Infrastructure.HealthCheck;
+using DemoApplication.Services.GiftAid;
+using DemoApplication.Services.HealthCheck;
 using DemoApplication.Repositories;
 using DemoApplication.Services;
 using Swashbuckle.Application;
-//using Asos.Identity.Core.Api.Authentication.Configuration;
+
 
 namespace DemoApplication
 {
@@ -29,19 +29,13 @@ namespace DemoApplication
 
             config.MapHttpAttributeRoutes();
 
-            try
-            {
-                config.Routes.MapHttpRoute(
+           config.Routes.MapHttpRoute(
                     name: "Swagger UI",
                     routeTemplate: "",
                     defaults: null,
                     constraints: null,
                     handler: new RedirectHandler(SwaggerDocsConfig.DefaultRootUrlResolver, "swagger/ui/index"));
-            }
-            catch (Exception e)
-            {
-
-            }
+            
         }
 
         private static void BuildDependencyResolver()

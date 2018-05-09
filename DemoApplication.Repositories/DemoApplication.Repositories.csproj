@@ -45,11 +45,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseCheck.cs" />
+    <Compile Include="Interfaces\IDatabaseCheck.cs" />
+    <Compile Include="Interfaces\ITaxRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaxData.cs" />
     <Compile Include="TaxRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

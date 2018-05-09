@@ -1,12 +1,5 @@
-﻿using DemoApplication.Controllers;
-
-namespace DemoApplication.Infrastructure.HealthCheck
+﻿namespace DemoApplication.Services.HealthCheck
 {
-    public interface IHealthCheckService
-    {
-        HealthCheckResponse CheckSystemHealth();
-    }
-
     public class HealthCheckService : IHealthCheckService
     {
         private readonly IHealthCheckFactory _healthCheckFactory;

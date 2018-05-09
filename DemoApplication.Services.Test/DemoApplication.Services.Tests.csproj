@@ -73,6 +73,7 @@
     <Compile Include="GiftAid\GiftAidCalculatorFinderShould.cs" />
     <Compile Include="GiftAid\GiftAidOrchestrationServiceShould.cs" />
     <Compile Include="GiftAid\SwimmingGiftAidCalculatorShould.cs" />
+    <Compile Include="GiftAid\CountryServiceShould.cs" />
     <Compile Include="HealthCheck\HealthCheckFactoryShould.cs" />
     <Compile Include="HealthCheck\HealthCheckResponseBuilderShould.cs" />
     <Compile Include="HealthCheck\HealthCheckServiceShould.cs" />
@@ -86,7 +87,7 @@
       <Project>{0a7b5dd4-f673-46a8-8e9b-d64be97de748}</Project>
       <Name>DemoApplication.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DemoApplication.Infrastructure\DemoApplication.Services.csproj">
+    <ProjectReference Include="..\DemoApplication.Services\DemoApplication.Services.csproj">
       <Project>{47a75f0c-51dc-4d89-982b-f547c694aa1e}</Project>
       <Name>DemoApplication.Services</Name>
     </ProjectReference>

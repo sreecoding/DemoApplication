@@ -1,7 +1,7 @@
 ﻿using System;
 using DemoApplication.Repositories;
 
-namespace DemoApplication.Services
+namespace DemoApplication.Services.GiftAid
 {
     public interface IGiftAidCalculator
     {

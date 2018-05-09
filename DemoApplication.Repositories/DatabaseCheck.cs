@@ -6,11 +6,6 @@ using System.Data.SqlClient;
 
 namespace DemoApplication.Repositories
 {
-    public interface IDatabaseCheck
-    {
-        bool CheckConnection();
-    }
-
     public class DatabaseCheck : IDatabaseCheck
     {
         public string ConnectionString = ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString;

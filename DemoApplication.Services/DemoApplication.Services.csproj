@@ -7,8 +7,8 @@
     <ProjectGuid>{47A75F0C-51DC-4D89-982B-F547C694AA1E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DemoApplication.Infrastructure</RootNamespace>
-    <AssemblyName>DemoApplication.Infrastructure</AssemblyName>
+    <RootNamespace>DemoApplication.Services</RootNamespace>
+    <AssemblyName>DemoApplication.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -61,7 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GiftAid\CountryService.cs" />
     <Compile Include="GiftAid\GiftAidCalculatorFinder.cs" />
+    <Compile Include="GiftAid\Interfaces\IGiftAidCalculatorFinder.cs" />
+    <Compile Include="GiftAid\Interfaces\IGiftAidOrchestrationService.cs" />
     <Compile Include="GiftAid\SwimmingGiftAidCalculator.cs" />
     <Compile Include="HealthCheck\HealthCheckFactory.cs" />
     <Compile Include="HealthCheck\HealthCheckOutput.cs" />
@@ -70,7 +73,10 @@
     <Compile Include="HealthCheck\HealthCheckService.cs" />
     <Compile Include="GiftAid\GeneralGiftAidCalculator.cs" />
     <Compile Include="GiftAid\GiftAidOrchestrationService.cs" />
-    <Compile Include="GiftAid\IGiftAidCalculator.cs" />
+    <Compile Include="GiftAid\Interfaces\IGiftAidCalculator.cs" />
+    <Compile Include="HealthCheck\Interfaces\IHealthCheckFactory.cs" />
+    <Compile Include="HealthCheck\Interfaces\IHealthCheckResponseBuilder.cs" />
+    <Compile Include="HealthCheck\Interfaces\IHealthCheckService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Web;
-using DemoApplication.Controllers;
+﻿using System.Net;
 using DemoApplication.Controllers.GiftAid;
 using Newtonsoft.Json;
 using RestSharp;

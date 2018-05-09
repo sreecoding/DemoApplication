@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication", "DemoApplication\DemoApplication.csproj", "{4539503F-0F4B-43C3-B477-9C8CF105BEFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.Services", "DemoApplication.Infrastructure\DemoApplication.Services.csproj", "{47A75F0C-51DC-4D89-982B-F547C694AA1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.Services", "DemoApplication.Services\DemoApplication.Services.csproj", "{47A75F0C-51DC-4D89-982B-F547C694AA1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.Specs", "DemoApplication.Specs\DemoApplication.Specs.csproj", "{31034EC5-12D1-4C3B-98A9-2BA5F64BB8CC}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.Controllers.Tests", "DemoApplication.Controllers.Tests\DemoApplication.Controllers.Tests.csproj", "{966E777F-4AA2-4DB3-A51E-B2334A55C369}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.Services.Tests", "DemoApplication.Services.Test\DemoApplication.Services.Tests.csproj", "{DCED2961-1D2E-4BB1-BB67-F633B6A2C1DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication.Repositories.Tests", "DemoApplication.Repositories.Tests\DemoApplication.Repositories.Tests.csproj", "{A9F78DDA-504E-40CC-8957-1CD9437CE1AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{DCED2961-1D2E-4BB1-BB67-F633B6A2C1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCED2961-1D2E-4BB1-BB67-F633B6A2C1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCED2961-1D2E-4BB1-BB67-F633B6A2C1DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F78DDA-504E-40CC-8957-1CD9437CE1AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F78DDA-504E-40CC-8957-1CD9437CE1AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F78DDA-504E-40CC-8957-1CD9437CE1AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F78DDA-504E-40CC-8957-1CD9437CE1AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

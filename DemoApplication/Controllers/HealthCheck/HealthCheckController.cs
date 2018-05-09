@@ -2,7 +2,7 @@
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DemoApplication.Infrastructure.HealthCheck;
+using DemoApplication.Services.HealthCheck;
 
 namespace DemoApplication.Controllers.HealthCheck
 {

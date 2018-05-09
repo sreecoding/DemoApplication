@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DemoApplication.Domain;
-using DemoApplication.Infrastructure.GiftAid;
+using DemoApplication.Services.GiftAid;
 using NUnit.Framework;
 
 namespace DemoApplication.Services.Test.GiftAid

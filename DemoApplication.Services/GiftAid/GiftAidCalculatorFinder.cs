@@ -2,13 +2,8 @@
 using System.Linq;
 using DemoApplication.Services;
 
-namespace DemoApplication.Infrastructure.GiftAid
+namespace DemoApplication.Services.GiftAid
 {
-    public interface IGiftAidCalculatorFinder
-    {
-        IGiftAidCalculator Find(string eventType);
-    }
-
     public class GiftAidCalculatorFinder : IGiftAidCalculatorFinder
     {
         private readonly List<IGiftAidCalculator> _giftAidCalculators;

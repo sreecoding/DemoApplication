@@ -122,7 +122,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DemoApplication.Infrastructure\DemoApplication.Services.csproj">
+    <ProjectReference Include="..\DemoApplication.Services\DemoApplication.Services.csproj">
       <Project>{47A75F0C-51DC-4D89-982B-F547C694AA1E}</Project>
       <Name>DemoApplication.Services</Name>
     </ProjectReference>
