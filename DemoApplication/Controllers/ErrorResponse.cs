@@ -2,7 +2,7 @@
 {
     public class ErrorResponse
     {
-        public ErrorResponse(string errorMessage, string parameterName)
+        public ErrorResponse(string parameterName,string errorMessage)
         {
             ErrorMessage = errorMessage;
             ParameterName = parameterName;

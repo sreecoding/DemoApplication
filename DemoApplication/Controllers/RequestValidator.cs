@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using DemoApplication.Domain;
-using DemoApplication.Services;
 using DemoApplication.Services.GiftAid;
 
 namespace DemoApplication.Controllers

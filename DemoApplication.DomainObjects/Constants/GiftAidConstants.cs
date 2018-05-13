@@ -18,5 +18,6 @@ namespace DemoApplication.Domain
             public const string EventType = "EventType";
         }
 
+
     }
 }

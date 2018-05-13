@@ -7,7 +7,6 @@ using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAid;
 using DemoApplication.Services.GiftAid;
 using DemoApplication.Repositories;
-using DemoApplication.Services;
 using Moq;
 using Shouldly;
 using TechTalk.SpecFlow;
@@ -20,7 +19,9 @@ namespace DemoApplication.Specs.GiftAid
     {
         private GiftAidController _giftAidController;
         private NegotiatedContentResult<GiftAidResponse> _result;
+        private NegotiatedContentResult<GiftAidErrorResponse> _errorResult;
         private Mock<ITaxRepository> _taxRepository;
+        private Mock<ICountryRepository> _countryRepository;
         private IGiftAidOrchestrationService _giftAidOrchestrationService;
         private decimal _donation;
         private string _country;
@@ -33,7 +34,14 @@ namespace DemoApplication.Specs.GiftAid
         {
             var taxData = table.CreateSet<TaxData>();
             _taxRepository = new Mock<ITaxRepository>();
-            _taxRepository.Setup(x => x.GetTaxRate("UK")).Returns(Task.FromResult(taxData.ToList()));
+
+            _taxRepository.Setup(x => x.GetTaxRate("UK"))
+                .Returns(Task.FromResult(taxData.ToList()));
+
+            //Move to it's on Spec
+            _countryRepository = new Mock<ICountryRepository>();
+            _countryRepository.Setup(x => x.GetCountryByCountryCode("UK"))
+                .Returns(new Country("UK", "United Kingdom"));
         }
 
         [Given(@"the Donation Amount is (.*) pounds")]
@@ -57,14 +65,31 @@ namespace DemoApplication.Specs.GiftAid
         [When(@"I make the Donation")]
         public async void WhenIMakeTheDonation()
         {
-            _giftAidCalculators = new List<IGiftAidCalculator>(){ new GeneralGiftAidCalculator(), new SwimmingGiftAidCalculator()};
-
-            _giftAidOrchestrationService =new GiftAidOrchestrationService(_taxRepository.Object, new GiftAidCalculatorFinder(_giftAidCalculators));
-
-            _giftAidController = new GiftAidController(_giftAidOrchestrationService, new RequestValidator(_giftAidCalculators,new CountryService(null)));
+            SetupGiftAidController();
 
             _result = (NegotiatedContentResult<GiftAidResponse>)await _giftAidController.GetGiftAid(_donation, _country, _event);
         }
+
+        private void SetupGiftAidController()
+        {
+            _giftAidCalculators =
+                new List<IGiftAidCalculator>() {new GeneralGiftAidCalculator(), new SwimmingGiftAidCalculator()};
+
+            _giftAidOrchestrationService =
+                new GiftAidOrchestrationService(_taxRepository.Object, new GiftAidCalculatorFinder(_giftAidCalculators));
+
+            _giftAidController = new GiftAidController(_giftAidOrchestrationService,
+                new RequestValidator(_giftAidCalculators, new CountryService(_countryRepository.Object)));
+        }
+
+        [When(@"I make the Donation Call")]
+        public async void WhenIMakeTheDonationCall()
+        {
+            SetupGiftAidController();
+
+            _errorResult = (NegotiatedContentResult<GiftAidErrorResponse>)await _giftAidController.GetGiftAid(_donation, _country, _event);
+        }
+
 
         [Then(@"the Total Gift Aid Amount Should be (.*) pounds")]
         public void ThenTheTotalGiftAidAmountShouldBePounds(int giftAidAmount)
@@ -81,7 +106,7 @@ namespace DemoApplication.Specs.GiftAid
         [Then(@"we get a BadRequest Response")]
         public void ThenWeGetABadRequestResponse()
         {
-            _result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            _errorResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
 
     }

@@ -81,6 +81,7 @@
     <Compile Include="GiftAidControllerShould.cs" />
     <Compile Include="HealthCheckControllerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestValidatorShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
