@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="GiftAid\CountryService.cs" />
     <Compile Include="GiftAid\GiftAidCalculatorFinder.cs" />
+    <Compile Include="GiftAid\Interfaces\ICountryService.cs" />
     <Compile Include="GiftAid\Interfaces\IGiftAidCalculatorFinder.cs" />
     <Compile Include="GiftAid\Interfaces\IGiftAidOrchestrationService.cs" />
     <Compile Include="GiftAid\SwimmingGiftAidCalculator.cs" />

@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Country.cs" />
     <Compile Include="DatabaseCheck.cs" />
+    <Compile Include="Interfaces\ICountryRepository.cs" />
     <Compile Include="Interfaces\IDatabaseCheck.cs" />
     <Compile Include="Interfaces\ITaxRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

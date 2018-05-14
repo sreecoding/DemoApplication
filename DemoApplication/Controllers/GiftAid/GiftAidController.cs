@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -45,15 +44,5 @@ namespace DemoApplication.Controllers.GiftAid
 
             return Content(HttpStatusCode.OK,new GiftAidResponse(giftAidAmount));
         }
-    }
-
-    public class GiftAidErrorResponse
-    {
-        public GiftAidErrorResponse(List<ErrorResponse> validationErrors)
-        {
-            ValidationErrors = validationErrors;
-        }
-
-        public IList<ErrorResponse> ValidationErrors { get; }
     }
 }

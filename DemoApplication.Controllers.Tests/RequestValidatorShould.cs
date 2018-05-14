@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DemoApplication.Domain;
+using DemoApplication.Repositories;
 using DemoApplication.Services.GiftAid;
+using DemoApplication.Services.GiftAid.Interfaces;
 using Moq;
 using NUnit.Framework;
 using Shouldly;

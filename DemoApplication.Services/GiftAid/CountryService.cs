@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DemoApplication.Repositories;
+using DemoApplication.Repositories.Interfaces;
+using DemoApplication.Services.GiftAid.Interfaces;
 
 namespace DemoApplication.Services.GiftAid
 {
@@ -19,27 +22,5 @@ namespace DemoApplication.Services.GiftAid
         {
             return _countryRepository.GetCountryByCountryCode(countryCode);
         }
-    }
-
-    public interface ICountryRepository
-    {
-        Country GetCountryByCountryCode(string countryCode);
-    }
-
-    public interface ICountryService
-    {
-        Country GetCountryByCountryCode(string countryCode);
-    }
-
-    public class Country
-    {
-        public Country(string countryCode, string countryName)
-        {
-            CountryCode = countryCode;
-            CountryName = countryName;
-        }
-
-        public string CountryCode { get; }
-        public string CountryName { get; }
     }
 }

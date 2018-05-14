@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DemoApplication.Domain;
 using DemoApplication.Services.GiftAid;
+using DemoApplication.Services.GiftAid.Interfaces;
 
 namespace DemoApplication.Controllers
 {

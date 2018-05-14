@@ -30,7 +30,7 @@ Scenario: Invalid input returns a BadRequest
 	Given The Event is XYZ
 	And the Donation Amount is 100 pounds
 	And the Donation Country is UK
-	When I make the Donation Call
+	When I make the Donation Call for Bad Request
 	Then we get a BadRequest Response
 
 

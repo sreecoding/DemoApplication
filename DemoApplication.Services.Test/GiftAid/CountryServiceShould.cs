@@ -1,5 +1,8 @@
 ﻿using System;
+using DemoApplication.Repositories;
+using DemoApplication.Repositories.Interfaces;
 using DemoApplication.Services.GiftAid;
+using DemoApplication.Services.GiftAid.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;

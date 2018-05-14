@@ -92,6 +92,10 @@
       <Project>{0a7b5dd4-f673-46a8-8e9b-d64be97de748}</Project>
       <Name>DemoApplication.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DemoApplication.Repositories\DemoApplication.Repositories.csproj">
+      <Project>{C2ADB29D-C353-43A4-996D-A58BDA13654A}</Project>
+      <Name>DemoApplication.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DemoApplication.Services\DemoApplication.Services.csproj">
       <Project>{47a75f0c-51dc-4d89-982b-f547c694aa1e}</Project>
       <Name>DemoApplication.Services</Name>

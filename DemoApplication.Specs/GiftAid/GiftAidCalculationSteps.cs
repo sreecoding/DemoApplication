@@ -7,6 +7,7 @@ using DemoApplication.Controllers;
 using DemoApplication.Controllers.GiftAid;
 using DemoApplication.Services.GiftAid;
 using DemoApplication.Repositories;
+using DemoApplication.Repositories.Interfaces;
 using Moq;
 using Shouldly;
 using TechTalk.SpecFlow;
@@ -38,7 +39,6 @@ namespace DemoApplication.Specs.GiftAid
             _taxRepository.Setup(x => x.GetTaxRate("UK"))
                 .Returns(Task.FromResult(taxData.ToList()));
 
-            //Move to it's on Spec
             _countryRepository = new Mock<ICountryRepository>();
             _countryRepository.Setup(x => x.GetCountryByCountryCode("UK"))
                 .Returns(new Country("UK", "United Kingdom"));
@@ -63,7 +63,7 @@ namespace DemoApplication.Specs.GiftAid
         }
 
         [When(@"I make the Donation")]
-        public async void WhenIMakeTheDonation()
+        public async Task WhenIMakeTheDonation()
         {
             SetupGiftAidController();
 
@@ -82,14 +82,13 @@ namespace DemoApplication.Specs.GiftAid
                 new RequestValidator(_giftAidCalculators, new CountryService(_countryRepository.Object)));
         }
 
-        [When(@"I make the Donation Call")]
-        public async void WhenIMakeTheDonationCall()
+        [When(@"I make the Donation Call for Bad Request")]
+        public async Task WhenIMakeTheDonationCallForBadRequest()
         {
             SetupGiftAidController();
 
             _errorResult = (NegotiatedContentResult<GiftAidErrorResponse>)await _giftAidController.GetGiftAid(_donation, _country, _event);
         }
-
 
         [Then(@"the Total Gift Aid Amount Should be (.*) pounds")]
         public void ThenTheTotalGiftAidAmountShouldBePounds(int giftAidAmount)

@@ -190,6 +190,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ErrorResponse.cs" />
     <Compile Include="Controllers\GiftAid\GiftAidController.cs" />
+    <Compile Include="Controllers\GiftAid\GiftAidErrorResponse.cs" />
     <Compile Include="Controllers\GiftAid\GiftAidResponse.cs" />
     <Compile Include="Controllers\HealthCheck\HealthCheckController.cs" />
     <Compile Include="Controllers\IRequestValidator.cs" />
