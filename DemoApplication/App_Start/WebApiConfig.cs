@@ -60,6 +60,7 @@ namespace DemoApplication
             builder.RegisterType<HealthCheckController>().UsingConstructor(typeof(IHealthCheckService)).InstancePerRequest();
             builder.RegisterType<CountryService>().As<ICountryService>();
             builder.RegisterType<CountryRepository>().As<ICountryRepository>();
+            builder.RegisterType<ConnectionStringConfig>().As<IConnectionStringConfig>();
 
             var container = builder.Build();
 

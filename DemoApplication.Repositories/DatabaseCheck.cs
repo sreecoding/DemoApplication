@@ -1,20 +1,26 @@
 ﻿using System;
-using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using DemoApplication.Repositories.Interfaces;
 
 namespace DemoApplication.Repositories
 {
     public class DatabaseCheck : IDatabaseCheck
     {
-        public string ConnectionString = ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString;
+        private readonly IConnectionStringConfig _connectionStringConfig;
+
+        public DatabaseCheck(IConnectionStringConfig connectionStringConfig)
+        {
+            this._connectionStringConfig = connectionStringConfig;
+        }
+
 
         public bool CheckConnection()
         {
             try
             {
-                IDbConnection db = new SqlConnection(ConnectionString);
+                IDbConnection db = new SqlConnection(_connectionStringConfig.GetConnectionString());
                 db.Open();
 
                 return true;

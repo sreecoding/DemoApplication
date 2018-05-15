@@ -44,9 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionStringConfig.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CountryRepository.cs" />
     <Compile Include="DatabaseCheck.cs" />
+    <Compile Include="Interfaces\IConnectionStringConfig.cs" />
     <Compile Include="Interfaces\ICountryRepository.cs" />
     <Compile Include="Interfaces\IDatabaseCheck.cs" />
     <Compile Include="Interfaces\ITaxRepository.cs" />
