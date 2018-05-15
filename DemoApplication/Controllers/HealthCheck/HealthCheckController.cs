@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DemoApplication.Services.HealthCheck;

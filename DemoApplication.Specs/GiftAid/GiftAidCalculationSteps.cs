@@ -29,10 +29,11 @@ namespace DemoApplication.Specs.GiftAid
         private string _event;
         private List<IGiftAidCalculator> _giftAidCalculators;
 
-
         [Given(@"We have the Following Tax Data in the database")]
         public void GivenWeHaveTheFollowingTaxDataInTheDatabase(Table table)
         {
+            var countries = new List<Country>() { new Country("UK", "United Kingdom") };
+
             var taxData = table.CreateSet<TaxData>();
             _taxRepository = new Mock<ITaxRepository>();
 
@@ -40,8 +41,9 @@ namespace DemoApplication.Specs.GiftAid
                 .Returns(Task.FromResult(taxData.ToList()));
 
             _countryRepository = new Mock<ICountryRepository>();
+            
             _countryRepository.Setup(x => x.GetCountryByCountryCode("UK"))
-                .Returns(new Country("UK", "United Kingdom"));
+                .Returns(Task.FromResult(countries));
         }
 
         [Given(@"the Donation Amount is (.*) pounds")]

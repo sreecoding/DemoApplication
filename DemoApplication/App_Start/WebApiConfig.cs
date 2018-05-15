@@ -10,7 +10,9 @@ using DemoApplication.ErrorHandler;
 using DemoApplication.Services.GiftAid;
 using DemoApplication.Services.HealthCheck;
 using DemoApplication.Repositories;
+using DemoApplication.Repositories.Interfaces;
 using DemoApplication.Services;
+using DemoApplication.Services.GiftAid.Interfaces;
 using Swashbuckle.Application;
 
 
@@ -56,6 +58,8 @@ namespace DemoApplication
             builder.RegisterType<GiftAidController>().UsingConstructor(typeof(IGiftAidOrchestrationService),typeof(IRequestValidator)).InstancePerRequest();
 
             builder.RegisterType<HealthCheckController>().UsingConstructor(typeof(IHealthCheckService)).InstancePerRequest();
+            builder.RegisterType<CountryService>().As<ICountryService>();
+            builder.RegisterType<CountryRepository>().As<ICountryRepository>();
 
             var container = builder.Build();
 

@@ -1,7 +1,10 @@
-﻿namespace DemoApplication.Repositories.Interfaces
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace DemoApplication.Repositories.Interfaces
 {
     public interface ICountryRepository
     {
-        Country GetCountryByCountryCode(string countryCode);
+        Task<List<Country>> GetCountryByCountryCode(string countryCode);
     }
 }

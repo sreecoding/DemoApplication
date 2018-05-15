@@ -18,9 +18,9 @@ namespace DemoApplication.Services.GiftAid
             _countryRepository = countryRepository;
         }
 
-        public Country GetCountryByCountryCode(string countryCode)
+        public async Task<List<Country>> GetCountryByCountryCode(string countryCode)
         {
-            return _countryRepository.GetCountryByCountryCode(countryCode);
+            return await _countryRepository.GetCountryByCountryCode(countryCode);
         }
     }
 }

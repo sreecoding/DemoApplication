@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Country.cs" />
+    <Compile Include="CountryRepository.cs" />
     <Compile Include="DatabaseCheck.cs" />
     <Compile Include="Interfaces\ICountryRepository.cs" />
     <Compile Include="Interfaces\IDatabaseCheck.cs" />

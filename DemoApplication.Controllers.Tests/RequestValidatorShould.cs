@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DemoApplication.Domain;
 using DemoApplication.Repositories;
 using DemoApplication.Services.GiftAid;
@@ -32,15 +33,15 @@ namespace DemoApplication.Controllers.Tests
         }
 
         [Test]
-        public void GivenInvalidCountry_ReturnsError()
+        public async Task GivenInvalidCountry_ReturnsError()
         {
             _countryService.Setup(x => x.GetCountryByCountryCode("TS"))
-                .Returns((Country) null);
+                .Returns(Task.FromResult((List<Country>)null));
 
-            var validationError = _requestValidator.Validate(100, "TS", "Swimming").Single();
-
+            var validationError = await _requestValidator.Validate(100, "TS", "Swimming");
+            
             //validationError.ErrorMessage.ShouldBe(testErrorMessage);
-            validationError.ParameterName.ShouldBe(GiftAidConstants.InputFields.Country);
+            validationError.Single().ParameterName.ShouldBe(GiftAidConstants.InputFields.Country);
         }
     }
 }

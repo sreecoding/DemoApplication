@@ -35,7 +35,7 @@ namespace DemoApplication.Controllers.GiftAid
         [ResponseType(typeof(GiftAidResponse))]
         public async Task<IHttpActionResult> GetGiftAid(decimal donationAmount, string country, string eventType)
         {
-            var validationErrors = _requestValidator.Validate(donationAmount, country,eventType);
+            var validationErrors = await _requestValidator.Validate(donationAmount, country,eventType);
 
             if (validationErrors.Any())
                 return Content(HttpStatusCode.BadRequest, new GiftAidErrorResponse(validationErrors));

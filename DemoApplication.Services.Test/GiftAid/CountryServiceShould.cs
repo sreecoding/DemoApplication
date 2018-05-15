@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using DemoApplication.Repositories;
 using DemoApplication.Repositories.Interfaces;
 using DemoApplication.Services.GiftAid;
 using DemoApplication.Services.GiftAid.Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
+using System.Collections.Generic;
 
 namespace DemoApplication.Services.Test.GiftAid
 {
@@ -25,17 +25,19 @@ namespace DemoApplication.Services.Test.GiftAid
         }
 
         [Test]
-        public void GivenCountryCode_ReturnsCountry()
+        public async Task GivenCountryCode_ReturnsCountry()
         {
             var countryExpected = new Country("US", "United States");
 
+            var countryListExpected = new List<Country> {countryExpected};
+
             _countryRepository
                 .Setup(x => x.GetCountryByCountryCode(CountryCode))
-                .Returns(countryExpected);
+                .Returns(Task.FromResult(countryListExpected));
 
-            var country = _countryService.GetCountryByCountryCode(CountryCode);
+            var countryList = await _countryService.GetCountryByCountryCode(CountryCode);
 
-            country.ShouldBeSameAs(countryExpected);
+            countryList.ShouldBeSameAs(countryListExpected);
 
         }
     }

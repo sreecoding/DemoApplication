@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DemoApplication.Domain;
 using DemoApplication.Services.GiftAid;
 using DemoApplication.Services.GiftAid.Interfaces;
@@ -18,7 +19,7 @@ namespace DemoApplication.Controllers
             _countryService = countryService;
         }
 
-        public List<ErrorResponse> Validate(decimal donationAmount, string countryCode, string eventType)
+        public async Task<List<ErrorResponse>> Validate(decimal donationAmount, string countryCode, string eventType)
         {
             var eventTypes = _giftAidCalculators.Select(x => x.GetGiftAidType()).ToList();
 
@@ -33,9 +34,9 @@ namespace DemoApplication.Controllers
             if (!eventTypes.Contains(eventType))
                 errorResponses.Add(new ErrorResponse(GiftAidConstants.InputFields.EventType, $"Only supported event types are {String.Join(",",eventTypes)}"));
 
-            var country = _countryService.GetCountryByCountryCode(countryCode);
+            var countryList = await _countryService.GetCountryByCountryCode(countryCode);
 
-            if (country == null || country.CountryCode != countryCode)
+            if (countryList == null || !countryList.Any() || countryList.Single().CountryCode != countryCode)
                 errorResponses.Add(new ErrorResponse(GiftAidConstants.InputFields.Country, $"{GiftAidConstants.InputFields.Country} is not a valid country code"));
 
             return (List<ErrorResponse>) errorResponses;

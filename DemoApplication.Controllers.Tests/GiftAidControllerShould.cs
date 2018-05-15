@@ -36,7 +36,7 @@ namespace DemoApplication.Controllers.Tests
                 .Returns(Task.FromResult(giftAidValue));
 
             _mockRequestValidator.Setup(x => x.Validate(100, "UK", eventType))
-                                .Returns(new List<ErrorResponse>());
+                                .Returns(Task.FromResult(new List<ErrorResponse>()));
 
             var giftAid = (NegotiatedContentResult<GiftAidResponse>)await _giftAidController.GetGiftAid(100, "UK",eventType);
 
@@ -49,7 +49,7 @@ namespace DemoApplication.Controllers.Tests
         public async Task GivenInvalidInputs_ReturnsBadRequest(int donationAmount, string country, string eventType)
         {
             _mockRequestValidator.Setup(x => x.Validate(donationAmount, country, eventType))
-                .Returns(new List<ErrorResponse>(){new ErrorResponse("Test Error Message","Test Field")});
+                .Returns(Task.FromResult(new List<ErrorResponse>(){new ErrorResponse("Test Error Message","Test Field")}));
 
             var giftAidResponse = (NegotiatedContentResult<GiftAidErrorResponse>) await _giftAidController.GetGiftAid(donationAmount, country, eventType);
 
@@ -65,7 +65,7 @@ namespace DemoApplication.Controllers.Tests
             const string parameterName = "Test Field";
 
             _mockRequestValidator.Setup(x => x.Validate(donationAmount, country, eventType))
-                .Returns(new List<ErrorResponse>() { new ErrorResponse(parameterName,testErrorMessage) });
+                .Returns(Task.FromResult(new List<ErrorResponse>() { new ErrorResponse(parameterName,testErrorMessage) }));
 
             var giftAidResponse = (NegotiatedContentResult<GiftAidErrorResponse>)await _giftAidController.GetGiftAid(donationAmount, country, eventType);
 

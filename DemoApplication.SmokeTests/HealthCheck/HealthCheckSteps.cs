@@ -13,8 +13,6 @@ namespace DemoApplication.SmokeTests.HealthCheck
     public class HealthCheckSteps
     {
         private const string HealthcheckEndpoint = "http://localhost:63094/api/HealthCheck/Get";
-        private const string BaseUrl = "http://localhost:63094";
-        //private  readonly string BaseUrl = ConfigurationManager.AppSettings["BaseUrl"];
 
         private HttpRequest _request;
         private HttpResponseMessage _httpResponseMessage;
