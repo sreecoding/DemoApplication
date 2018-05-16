@@ -12,12 +12,9 @@ namespace DemoApplication.Domain
 
         public class InputFields
         {
-
             public const string Donation = "Donation Amount";
             public const string Country = "Country";
             public const string EventType = "EventType";
         }
-
-
     }
 }
