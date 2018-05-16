@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Configuration;
+using System.Net;
 using DemoApplication.Controllers.GiftAid;
 using Newtonsoft.Json;
 using RestSharp;
@@ -12,6 +13,7 @@ namespace DemoApplication.SmokeTests.GiftAid
     {
         private const string GiftaidApiEndpoint = "/api/GiftAid/GetGiftAid";
         private const string BaseUrl = "http://localhost:63094";
+
         private int _donationAmount;
         private string _country;
         private RestRequest _request;

@@ -22,7 +22,7 @@ namespace DemoApplication.Repositories.Tests
         {
             ConnectionString = ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString;
 
-            await SetupTestDataInDatabase(CountryCode);
+            await SetupTestDataInDatabase();
         }
 
         [Test]
@@ -38,18 +38,13 @@ namespace DemoApplication.Repositories.Tests
         [TearDown]
         public async Task TearDown()
         {
-            await DeleteTestDataFromDatabase(CountryCode);
+            await DeleteTestDataFromDatabase();
         }
 
-        private async Task SetupTestDataInDatabase(string code)
+        private async Task SetupTestDataInDatabase()
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                if (db.State == ConnectionState.Closed)
-                {
-                    db.Open();
-                }
-
                 await InsertInitialData(db, RepositoryTestConstants.InsertCountry);
                 await InsertInitialData(db, RepositoryTestConstants.InsertTaxRateForCountry);
             }
@@ -64,15 +59,10 @@ namespace DemoApplication.Repositories.Tests
         }
 
 
-        private async Task DeleteTestDataFromDatabase(string code)
+        private async Task DeleteTestDataFromDatabase()
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                if (db.State == ConnectionState.Closed)
-                {
-                    db.Open();
-                }
-
                 await DeleteTestData(db, RepositoryTestConstants.DeleteCountry);
                 await DeleteTestData(db, RepositoryTestConstants.DeleteCountryTaxRate);
             }

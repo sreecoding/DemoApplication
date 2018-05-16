@@ -55,10 +55,6 @@ namespace DemoApplication.Repositories.Tests
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                if (db.State == ConnectionState.Closed)
-                {
-                    db.Open();
-                }
                 await InsertCountryData(db, RepositoryTestConstants.InsertCountry);
             }
         }
@@ -75,11 +71,6 @@ namespace DemoApplication.Repositories.Tests
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                if (db.State == ConnectionState.Closed)
-                {
-                    db.Open();
-                }
-
                 await DeleteTestData(db, RepositoryTestConstants.DeleteCountry);
             }
         }
