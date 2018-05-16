@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+﻿using System.Collections.Specialized;
 using System.Net;
 using DemoApplication.Controllers.GiftAid;
 using Newtonsoft.Json;
@@ -11,8 +11,8 @@ namespace DemoApplication.SmokeTests.GiftAid
     [Binding]
     public class GiftAidValuesSteps
     {
-        private const string GiftaidApiEndpoint = "/api/GiftAid/GetGiftAid";
-        private const string BaseUrl = "http://localhost:63094";
+        private readonly string _giftaidApiEndpoint = System.Configuration.ConfigurationManager.AppSettings["GiftaidApiEndpoint"];
+        private readonly string _baseUrl = System.Configuration.ConfigurationManager.AppSettings["BaseUrl"];
 
         private int _donationAmount;
         private string _country;
@@ -42,12 +42,12 @@ namespace DemoApplication.SmokeTests.GiftAid
         [When(@"a call is made to get Gift Aid")]
         public void WhenACallIsMadeToGetGiftAid()
         {
-            _request = new RestRequest(GiftaidApiEndpoint, Method.GET);
+            _request = new RestRequest(_giftaidApiEndpoint, Method.GET);
             _request.Parameters.Add(new Parameter() {Name = "country",Value = _country,Type = ParameterType.QueryString});
             _request.Parameters.Add(new Parameter() {Name = "donationAmount",Value = _donationAmount,Type = ParameterType.QueryString});
             _request.Parameters.Add(new Parameter() {Name = "eventtype",Value = _eventType, Type = ParameterType.QueryString});
 
-            var client = new RestClient(BaseUrl);
+            var client = new RestClient(_baseUrl);
 
             _restResponse = client.Execute(_request);
         }

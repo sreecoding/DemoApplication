@@ -15,7 +15,6 @@ namespace DemoApplication.Repositories.Tests
         public string ConnectionString;
         private IDatabaseCheck _databaseCheck;
         private Mock<IConnectionStringConfig> _connectionStringConfig;
-        
 
         [SetUp]
         public void Setup()

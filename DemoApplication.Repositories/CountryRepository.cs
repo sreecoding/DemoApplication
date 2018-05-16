@@ -11,11 +11,16 @@ namespace DemoApplication.Repositories
 {
     public class CountryRepository : ICountryRepository
     {
-        public string ConnectionString = ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString;
+        private readonly IConnectionStringConfig _connectionStringConfig;
+
+        public CountryRepository(IConnectionStringConfig connectionStringConfig)
+        {
+            _connectionStringConfig = connectionStringConfig;
+        }
 
         public async Task<List<Country>> GetCountryByCountryCode(string countryCode)
         {
-            using (IDbConnection db = new SqlConnection(ConnectionString))
+            using (IDbConnection db = new SqlConnection(_connectionStringConfig.GetConnectionString()))
             {
                 const string countryStoredProcedure = "GetCountryByCountryCode";
 

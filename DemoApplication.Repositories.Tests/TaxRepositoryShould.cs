@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using DemoApplication.Repositories.Interfaces;
+using Moq;
 using NUnit.Framework;
 using Shouldly;
 
@@ -16,11 +18,16 @@ namespace DemoApplication.Repositories.Tests
 
         private ITaxRepository _taxRepository;
         private const string CountryCode = "TS";
+        private Mock<IConnectionStringConfig> _connectionStringConfig;
 
         [SetUp]
         public async Task Setup()
         {
             ConnectionString = ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString;
+            _connectionStringConfig = new Mock<IConnectionStringConfig>();
+
+            _connectionStringConfig.Setup(x => x.GetConnectionString())
+                .Returns(ConnectionString);
 
             await SetupTestDataInDatabase();
         }
@@ -28,7 +35,7 @@ namespace DemoApplication.Repositories.Tests
         [Test]
         public async Task GivenACountryCode_ReturnsTaxRate()
         {
-            _taxRepository = new TaxRepository();
+            _taxRepository = new TaxRepository(_connectionStringConfig.Object);
 
             var taxRates = await _taxRepository.GetTaxRate(CountryCode);
 

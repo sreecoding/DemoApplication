@@ -1,20 +1,17 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
-using RestSharp;
 using Shouldly;
 using TechTalk.SpecFlow;
-using HttpResponse = System.Web.HttpResponse;
 
 namespace DemoApplication.SmokeTests.HealthCheck
 {
     [Binding]
     public class HealthCheckSteps
     {
-        private const string HealthcheckEndpoint = "http://localhost:63094/api/HealthCheck/Get";
+        private readonly string _healthcheckEndpoint = System.Configuration.ConfigurationManager.AppSettings["BaseUrl"] 
+                                                      + System.Configuration.ConfigurationManager.AppSettings["HealthcheckEndpoint"];
 
-        private HttpRequest _request;
         private HttpResponseMessage _httpResponseMessage;
 
        
@@ -23,7 +20,7 @@ namespace DemoApplication.SmokeTests.HealthCheck
         {
            using (var client = new HttpClient())
            {
-                _httpResponseMessage = await client.GetAsync(HealthcheckEndpoint);
+                _httpResponseMessage = await client.GetAsync(_healthcheckEndpoint);
            }
         }
 
